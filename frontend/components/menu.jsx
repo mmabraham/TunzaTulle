@@ -16,7 +16,7 @@ const Menu = props => {
       >
       <MenuItem primaryText="Refresh" />
       <MenuItem primaryText="Help" />
-      <MenuItem primaryText="Sign out" />
+      <MenuItem primaryText="Sign out" onTouchTap={props.logout} />
     </IconMenu>
   )
 }

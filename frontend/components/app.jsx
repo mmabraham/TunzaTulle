@@ -7,11 +7,11 @@ import Navbar from './navbar_container';
 const App = () => {
   return (
   <div>
-   <header>
-     <ProtectedRoute component={Navbar}/>
-     <AuthRoute path='/login' component={SessionForm} />
-     <AuthRoute path='/signup' component={SessionForm} />
-   </header>
+  <header>
+    <ProtectedRoute path='/' component={Navbar} />
+    <AuthRoute path='/login' component={SessionForm} />
+    <AuthRoute path='/signup' component={SessionForm} />
+  </header>
  </div>
  );
 };
