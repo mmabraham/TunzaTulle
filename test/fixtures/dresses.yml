@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: dresses
+#
+#  id            :integer          not null, primary key
+#  barcode       :string
+#  title         :string           not null
+#  color         :string           not null
+#  description   :text
+#  price         :decimal(, )
+#  waist         :decimal(, )      not null
+#  min_waist     :decimal(, )      not null
+#  max_waist     :decimal(, )      not null
+#  sleeve_length :string           not null
+#  height        :decimal(, )      not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+#  column: value
