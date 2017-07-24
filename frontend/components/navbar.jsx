@@ -7,6 +7,7 @@ const Navbar = (props) => {
   return (
     <AppBar
       title="App"
+      onTouchTap={props.toggleDrawer}
       iconElementRight={<Menu {...props}/>}
       />
   );

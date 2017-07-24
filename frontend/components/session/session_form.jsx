@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
+import AppBar from 'material-ui/AppBar';
 
 class SessionForm extends React.Component {
 	constructor(props) {
@@ -42,28 +43,31 @@ class SessionForm extends React.Component {
 		const altText = this.props.formType === 'login' ? "Still need to be approved?" :  "Have already been approved?";
 
     return (
-			<Paper style={style} zDepth={5} >
-				<form>
-					<TextField
-						fullWidth={true}
-						floatingLabelText="Username"
-						onChange={this.handleChange('username')}
-						value={this.state.username}
-						errorText={ errors ? errors.username : '' }
-						/>
-					<TextField
-						fullWidth={true}
-						floatingLabelText="Password"
-						onChange={this.handleChange('password')}
-						type='password'
-						value={this.state.password}
-						errorText={ errors ? errors.password : '' }
-						/>
-					<RaisedButton label={buttonText} fullWidth={true} primary={true} onTouchTap={this.handleSubmit}/>
-					<span>{altText}</span>
-					<RaisedButton label={this.props.altForm} secondary={true} onTouchTap={this.props.switchForm}/>
-				</form>
-			</Paper>
+			<main>
+				<AppBar title="App" />
+				<Paper style={style} zDepth={5} >
+					<form>
+						<TextField
+							fullWidth={true}
+							floatingLabelText="Username"
+							onChange={this.handleChange('username')}
+							value={this.state.username}
+							errorText={ errors ? errors.username : '' }
+							/>
+						<TextField
+							fullWidth={true}
+							floatingLabelText="Password"
+							onChange={this.handleChange('password')}
+							type='password'
+							value={this.state.password}
+							errorText={ errors ? errors.password : '' }
+							/>
+						<RaisedButton label={buttonText} fullWidth={true} primary={true} onTouchTap={this.handleSubmit}/>
+						<span>{altText}</span>
+						<RaisedButton label={this.props.altForm} secondary={true} onTouchTap={this.props.switchForm}/>
+					</form>
+				</Paper>
+			</main>
   );
   }
 }

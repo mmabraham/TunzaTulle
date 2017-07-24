@@ -1,7 +1,7 @@
 import Navbar from './navbar';
 import { connect } from 'react-redux';
 import { logout } from '../actions/session_actions';
-
+import { toggleDrawer } from '../actions/drawer_actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -12,6 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
+    toggleDrawer: () => dispatch(toggleDrawer())
   };
 };
 
