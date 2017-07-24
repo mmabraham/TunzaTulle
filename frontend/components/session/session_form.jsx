@@ -28,7 +28,7 @@ class SessionForm extends React.Component {
   render() {
 		const style = {
 			padding: 30,
-		  height: 300,
+		  height: 360,
 			width: '40%',
 		  minWidth: 500,
 		  position: 'fixed',
@@ -37,27 +37,31 @@ class SessionForm extends React.Component {
 		  textAlign: 'center',
 		};
 
-    const buttonText = (this.props.formType === "login") ? "Login" : "Sign Up";
+		const errors = this.props.errors;
+    const buttonText = (this.props.formType === 'login') ? 'Login' : 'Sign Up';
+		const altText = this.props.formType === 'login' ? "Still need to be approved?" :  "Have already been approved?";
 
     return (
 			<Paper style={style} zDepth={5} >
-				<form onSubmit={this.handleSubmit}>
+				<form>
 					<TextField
 						fullWidth={true}
 						floatingLabelText="Username"
 						onChange={this.handleChange('username')}
 						value={this.state.username}
+						errorText={ errors ? errors.username : '' }
 						/>
-					<br />
 					<TextField
 						fullWidth={true}
 						floatingLabelText="Password"
 						onChange={this.handleChange('password')}
 						type='password'
 						value={this.state.password}
+						errorText={ errors ? errors.password : '' }
 						/>
-					<br />
-					<RaisedButton label={buttonText} fullWidth={true} primary={true}/>
+					<RaisedButton label={buttonText} fullWidth={true} primary={true} onTouchTap={this.handleSubmit}/>
+					<span>{altText}</span>
+					<RaisedButton label={this.props.altForm} secondary={true} onTouchTap={this.props.switchForm}/>
 				</form>
 			</Paper>
   );
