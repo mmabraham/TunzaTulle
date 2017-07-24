@@ -41,8 +41,8 @@ status      | string    | not null
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
-name            | string    | not null
-email           | string    | not null, indexed, unique
+name            | string    |
+email           | string    |
 phone_number    | string    |
 address         | string    |
 notes           | text      |
