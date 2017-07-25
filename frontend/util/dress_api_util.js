@@ -5,3 +5,10 @@ export const fetchDresses = filters => {
     data: { filters }
   })
 }
+
+export const fetchDress = id => {
+  return $.ajax({
+    method: 'GET',
+    url: `/api/dresses/${id}`,
+  })
+}

@@ -1,9 +1,9 @@
-import { RECEIVE_DRESSES } from '../actions/dress_actions';
+import { RECEIVE_DRESSES, RECIEVE_DRESS } from '../actions/dress_actions';
 
-const sessionReducer = (state = {}, action) => {
+const dressesReducer = (state = {}, action) => {
   switch (action.type) {
-    // case RECIEVE_DRESS:
-    //   return {};
+    case RECIEVE_DRESS:
+      return Object.assign({}, state, action.dress);
     case RECEIVE_DRESSES:
       return action.dresses;
     default:
@@ -11,4 +11,4 @@ const sessionReducer = (state = {}, action) => {
   }
 };
 
-export default sessionReducer;
+export default dressesReducer;

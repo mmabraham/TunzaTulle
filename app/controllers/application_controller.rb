@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
   def require_logged_in!
     render json: {}, status: 401 unless logged_in?
   end
+
+  def require_admin!
+    render json: (), status: 401 unless logged_in? && current_user.admin
+  end
 end
