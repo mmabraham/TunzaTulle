@@ -1,7 +1,7 @@
 import UserList from './user_list';
 import { connect } from 'react-redux'
 import { asArray } from '../reducers/selectors';
-import { fetchUsers } from '../actions/user_actions';
+import { fetchUsers, authorizeUser } from '../actions/user_actions';
 
 const mapStateToProps = state => {
   return {
@@ -12,6 +12,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchUsers: () => dispatch(fetchUsers()),
+    authorize: (id, admin) => dispatch(authorizeUser(id, admin)),
   }
 }
 

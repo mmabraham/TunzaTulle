@@ -11,3 +11,8 @@ export const receiveUsers = users =>  {
 export const fetchUsers = () => dispatch => {
   return ApiUtil.fetchUsers().then(users => dispatch(receiveUsers(users)));
 }
+
+export const authorizeUser = (id, admin) => dispatch => {
+  return ApiUtil.authorizeUser(id, admin)
+    .then(users => dispatch(receiveUsers(users)))
+}

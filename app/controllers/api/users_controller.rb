@@ -17,8 +17,8 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    user = User.find(params.id)
-    user.admin = true
+    user = User.find(params[:id])
+    user.admin = params[:admin]
     if user.save
       @users = User.all
       render :index

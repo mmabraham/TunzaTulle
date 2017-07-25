@@ -1,5 +1,5 @@
 import React from 'react';
-import List from 'material-ui/List/List';
+import { Table, TableBody } from 'material-ui/Table';
 import UserListItem from './user_list_item';
 
 export default class UserList extends React.Component {
@@ -12,11 +12,15 @@ export default class UserList extends React.Component {
   }
 
   render() {
-    const users = this.props.users.map(user => (<UserListItem user={user} key={user.id}/>))
+    const users = this.props.users.map(user => (
+      <UserListItem user={user} key={user.id} authorize={this.props.authorize}/>
+    ))
     return (
-      <List>
-        {users}
-      </List>
+      <Table>
+        <TableBody>
+          {users}
+        </TableBody>
+      </Table>
   )
   }
 }
