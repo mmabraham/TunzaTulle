@@ -1,15 +1,17 @@
 import UserList from './user_list';
 import { connect } from 'react-redux'
+import { asArray } from '../reducers/selectors';
+import { fetchUsers } from '../actions/user_actions';
 
 const mapStateToProps = state => {
   return {
-    users: state.users,
+    users: asArray(state.users),
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchUsers: (id) => dispatch(fetchUsers(id)),
+    fetchUsers: () => dispatch(fetchUsers()),
   }
 }
 

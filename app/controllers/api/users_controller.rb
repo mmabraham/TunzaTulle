@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  before_action :require_admin!, only: :update, :index
+  before_action :require_admin!, only: [:update, :index]
   def index
     @users = User.all
     render :index

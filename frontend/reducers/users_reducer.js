@@ -1,4 +1,4 @@
-import { RECEIVE_USERS} from '../actions/dress_actions';
+import { RECEIVE_USERS } from '../actions/user_actions';
 
 const usersReducer = (state = {}, action) => {
   switch (action.type) {
