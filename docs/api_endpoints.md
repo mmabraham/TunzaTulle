@@ -37,7 +37,7 @@
 - `POST /api/dresses`
 	- Create listing
 - `GET /api/dresses/:id`
-	- Will include the dress's booking dates and possibly reviews count and average
+	- Will include the dress's order dates
 - `PATCH /api/dresses/:id`
 - `DELETE /api/dresses/:id`
 
