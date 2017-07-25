@@ -12,9 +12,10 @@ const App = () => {
   <header>
     <ProtectedRoute path='/' component={Navbar} />
     <ProtectedRoute path='/' component={Drawer} />
-    <ProtectedRoute path='/dresses' component={DressList} />
-    <AuthRoute path='/login' component={SessionForm} />
-    <AuthRoute path='/signup' component={SessionForm} />
+    <ProtectedRoute exact path='/dresses' component={DressList} />
+    <ProtectedRoute path='/dresses/:id' component={DressList} />
+    <AuthRoute exact path='/login' component={SessionForm} />
+    <AuthRoute exact path='/signup' component={SessionForm} />
   </header>
  </div>
  );
