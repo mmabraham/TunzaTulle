@@ -5,5 +5,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :index, :update]
     resource :session, only: [:create, :destroy]
     resources :dresses, except: [:new, :edit]
+    resources :customers, except: [:new, :edit]
+    resources :orders, except: [:new, :edit]
   end
 end
