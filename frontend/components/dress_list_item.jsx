@@ -2,7 +2,6 @@ import React from 'react'
 import { GridTile } from 'material-ui/GridList';
 import { Link } from 'react-router-dom';
 
-
 const DressListItem = props => {
   const dress = props.dress
   return (

@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170724214838) do
+ActiveRecord::Schema.define(version: 20170726021531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "address"
+    t.text     "notes"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "dresses", force: :cascade do |t|
     t.string   "barcode"
@@ -33,6 +43,17 @@ ActiveRecord::Schema.define(version: 20170724214838) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "customer_id",                     null: false
+    t.integer  "dress_id",                        null: false
+    t.datetime "event_date",                      null: false
+    t.datetime "start_date",                      null: false
+    t.datetime "end_date",                        null: false
+    t.string   "status",      default: "pending", null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "users", force: :cascade do |t|

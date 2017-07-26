@@ -9,16 +9,16 @@ const DrawerMenu = props => {
       docked={false}
       onRequestChange={props.toggleDrawer}
     >
-      <MenuItem onTouchTap={() => props.redirect('./users')} >
+      <MenuItem onTouchTap={() => props.redirectTo('/users')} >
         Manage Users
       </MenuItem>
-      <MenuItem onTouchTap={() => props.redirect('./dresses')} >
+      <MenuItem onTouchTap={() => props.redirectTo('/dresses')} >
         Manage Dresses
       </MenuItem>
-      <MenuItem onTouchTap={() => props.redirect('./orders')} >
+      <MenuItem onTouchTap={() => props.redirectTo('/orders')} >
         Manage Orders
       </MenuItem>
-      <MenuItem onTouchTap={() => props.redirect('./customers')} >
+      <MenuItem onTouchTap={() => props.redirectTo('/customers')} >
         Manage Customers
       </MenuItem>
     </Drawer>

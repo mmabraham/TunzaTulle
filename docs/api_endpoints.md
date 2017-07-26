@@ -43,11 +43,12 @@
 
 ### Orders
 
-- `GET /api/bookings`
+- `GET /api/orders`
 	- accepts `customer_id` or `dress_id` query param
 	- includes necessary dress, order and customer info
-- `POST /api/bookings`
-- `DELETE /api/bookings/:id`
+- `POST /api/orders`
+- `PATCH /api/orders/:id`
+- `DELETE /api/orders/:id`
 
 ### Customers
 - `POST /api/customers`

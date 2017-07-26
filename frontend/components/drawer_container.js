@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import Drawer from './drawer';
 import { withRouter } from 'react-router-dom';
+import Drawer from './drawer';
 import { toggleDrawer } from '../actions/drawer_actions';
 
 const mapStateToProps = state => {
@@ -11,9 +11,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    redirect: (path) => {
+    redirectTo: (url) => {
       dispatch(toggleDrawer());
-      ownProps.history.push(path);
+      ownProps.history.push(url);
     },
     toggleDrawer: () => dispatch(toggleDrawer()),
   }
