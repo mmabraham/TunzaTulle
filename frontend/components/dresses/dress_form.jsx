@@ -1,4 +1,5 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import CurrencyInput from 'react-currency-input';
@@ -47,107 +48,110 @@ export default class DressForm extends React.Component {
     const errors = this.props.errors;
     console.log(this.state)
     return (
-      <form>
-        <TextField
-          fullWidth={true}
-          floatingLabelText="Bar code"
-          onChange={this.handleChange('barcode')}
-          value={this.state.barcode || this.props.barcode }
-          errorText={ errors ? errors.barcode : '' }
-        />
+      <Paper zDepth={2} className="dress-form">
+        <form>
+          <TextField
+            fullWidth={true}
+            floatingLabelText="Bar code"
+            onChange={this.handleChange('barcode')}
+            value={this.state.barcode || this.props.barcode }
+            errorText={ errors ? errors.barcode : '' }
+            />
 
-        <TextField
-          fullWidth={true}
-          floatingLabelText="Title"
-          onChange={this.handleChange('title')}
-          value={this.state.title || this.props.title }
-          errorText={ errors ? errors.title : '' }
-        />
+          <TextField
+            fullWidth={true}
+            floatingLabelText="Title"
+            onChange={this.handleChange('title')}
+            value={this.state.title || this.props.title }
+            errorText={ errors ? errors.title : '' }
+            />
 
-        <TextField
-          fullWidth={true}
-          floatingLabelText="Color"
-          onChange={this.handleChange('color')}
-          value={this.state.color || this.props.color }
-          errorText={ errors ? errors.color : '' }
-        />
+          <TextField
+            fullWidth={true}
+            floatingLabelText="Color"
+            onChange={this.handleChange('color')}
+            value={this.state.color || this.props.color }
+            errorText={ errors ? errors.color : '' }
+            />
 
-        <TextField
-          fullWidth={true}
-          floatingLabelText="Description"
-          onChange={this.handleChange('description')}
-          value={this.state.description || this.props.description }
-          errorText={ errors ? errors.description : '' }
-        />
+          <TextField
+            fullWidth={true}
+            floatingLabelText="Description"
+            onChange={this.handleChange('description')}
+            value={this.state.description || this.props.description }
+            errorText={ errors ? errors.description : '' }
+            />
 
-      <TextField
-        fullWidth={true}
-        floatingLabelText="Price"
-        >
-        <CurrencyInput
-          value={this.state.price}
-          onChangeEvent={this.handleChange('price')}
-          prefix="$"
-          />
-      </TextField>
+          <TextField
+            fullWidth={true}
+            floatingLabelText="Price"
+            >
+            <CurrencyInput
+              value={this.state.price}
+              onChangeEvent={this.handleChange('price')}
+              prefix="$"
+              />
+          </TextField>
 
-      <TextField
-        floatingLabelText="Waist"
-        onChange={this.handleChange('waist')}
-        value={this.state.waist || this.props.waist }
-        errorText={ errors ? errors.waist : '' }
-      />
+          <TextField
+            floatingLabelText="Waist"
+            onChange={this.handleChange('waist')}
+            value={this.state.waist || this.props.waist }
+            errorText={ errors ? errors.waist : '' }
+            />
 
-      <TextField
-        floatingLabelText="Min Waist"
-        onChange={this.handleChange('min_waist')}
-        value={this.state.min_waist || this.props.min_waist || (this.state.waist && this.state.waist)}
-        errorText={ errors ? errors.min_waist : '' }
-      />
+          <TextField
+            floatingLabelText="Min Waist"
+            onChange={this.handleChange('min_waist')}
+            value={this.state.min_waist || this.props.min_waist || (this.state.waist && this.state.waist)}
+            errorText={ errors ? errors.min_waist : '' }
+            />
 
-      <TextField
-        floatingLabelText="Waist Stretch"
-        onChange={this.handleChange('max_waist')}
-        value={this.state.max_waist || this.props.max_waist || (this.state.waist && this.state.waist + '.5')}
-        errorText={ errors ? errors.max_waist : '' }
-      />
+          <TextField
+            floatingLabelText="Waist Stretch"
+            onChange={this.handleChange('max_waist')}
+            value={this.state.max_waist || this.props.max_waist || (this.state.waist && this.state.waist + '.5')}
+            errorText={ errors ? errors.max_waist : '' }
+            />
 
-      <TextField
-        floatingLabelText="Height"
-        onChange={this.handleChange('height')}
-        value={this.state.height || this.props.height}
-        errorText={ errors ? errors.height : '' }
-      />
+          <TextField
+            floatingLabelText="Height"
+            onChange={this.handleChange('height')}
+            value={this.state.height || this.props.height}
+            errorText={ errors ? errors.height : '' }
+            />
 
 
-      <SelectField
-        fullWidth={true}
-        floatingLabelText="Sleeve Length"
-        value={this.state.sleeve_length}
-        onChange={this.handleChange('sleeve_length')}
-      >
-        <MenuItem value={'long'} primaryText="Long" />
-        <MenuItem value={'half length'} primaryText="Half Length" />
-        <MenuItem value={'3 / 4'} primaryText="3 / 4" />
-      </SelectField>
+          <SelectField
+            fullWidth={true}
+            floatingLabelText="Sleeve Length"
+            value={this.state.sleeve_length}
+            onChange={this.handleChange('sleeve_length')}
+            >
+            <MenuItem value={'long'} primaryText="Long" />
+            <MenuItem value={'half length'} primaryText="Half Length" />
+            <MenuItem value={'3 / 4'} primaryText="3 / 4" />
+          </SelectField>
 
-      <TextField
-        type="file"
-        fullWidth={true}
-        onChange={this.handleFileChange}
-        errorText={ errors ? errors.description : '' }
-      />
-    {
-      this.state.image ? (
-        <img src={this.state.image}/>
-      ) : null
-    }
-    <RaisedButton
-      label="Save"
-      primary={true}
-      onClick={this.handleSubmit}
-    />
-      </form>
+          <TextField
+            type="file"
+            fullWidth={true}
+            onChange={this.handleFileChange}
+            errorText={ errors ? errors.description : '' }
+            />
+          {
+            this.state.image ? (
+              <img src={this.state.image}/>
+            ) : null
+          }
+          <RaisedButton
+            label="Save"
+            primary={true}
+            onClick={this.handleSubmit}
+            />
+        </form>
+
+      </Paper>
     )
   }
 }

@@ -1,5 +1,8 @@
 import React from 'react';
 import { DateRangePicker } from 'react-dates';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -18,9 +21,16 @@ export default class SearchBar extends React.Component {
     }
   }
 
+  handleFilterChange(filterType) {
+    return (e, i, val) => {
+      this.setState({[filterType]: val});
+      this.props.updateFilter(filterType, val);
+    }
+  }
+
   render() {
     return (
-      <div>
+      <Toolbar>
         <DateRangePicker
           startDate={this.state.startDate}
           endDate={this.state.endDate}
@@ -28,7 +38,16 @@ export default class SearchBar extends React.Component {
           focusedInput={this.state.focusedInput}
           onFocusChange={focusedInput => this.setState({ focusedInput })}
         />
-      </div>
+        <SelectField
+          value={this.state.sleeve_length}
+          onChange={this.handleFilterChange('sleeve_length')}
+          >
+          <MenuItem primaryText="Sleeve length"/>
+          <MenuItem value={'long'} primaryText="Long" />
+          <MenuItem value={'half length'} primaryText="Half Length" />
+          <MenuItem value={'3 / 4'} primaryText="3 / 4" />
+        </SelectField>
+      </Toolbar>
     )
   }
 }

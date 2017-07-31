@@ -40,6 +40,8 @@ class Dress < ActiveRecord::Base
     dresses = Dress.by_height(filters[:height], dresses) if filters[:height]
     dresses = Dress.by_waist(filters[:waist], dresses) if filters[:waist]
     dresses = Dress.by_price(filters[:price], dresses) if filters[:price]
+    dresses = Dress.by_sleeve_length(filters[:sleeve_length], dresses) if filters[:sleeve_length]
+    dresses = Dress.by_color(filters[:color], dresses) if filters[:color]
   end
 
   private
@@ -68,5 +70,13 @@ class Dress < ActiveRecord::Base
     dresses
     .where('price <= ?', max)
     .where('price >= ?', min || 0)
+  end
+
+  def self.by_sleeve_length(sleeve_length, dresses)
+    dresses.where(sleeve_length: sleeve_length)
+  end
+
+  def self.by_color(color, dresses)
+    dresses.where(color: color)
   end
 end
