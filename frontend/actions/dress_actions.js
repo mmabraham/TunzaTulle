@@ -18,11 +18,15 @@ export const receiveDress = dress => {
 }
 
 export const fetchDresses = filters => dispatch => {
-  Util.fetchDresses(filters)
+  return Util.fetchDresses(filters)
     .then((dresses) => dispatch(receiveDresses(dresses)))
 }
 
 export const fetchDress = id => dispatch => {
-  Util.fetchDress(id)
+  return Util.fetchDress(id)
     .then((dress) => dispatch(receiveDress(dress)))
+}
+
+export const createDress = dress => dispatch => {
+  return Util.createDress(dress)
 }

@@ -4,10 +4,10 @@ import SessionForm from './session/session_form_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import Navbar from './navbar_container';
 import Drawer from './drawer_container';
-import DressList from './dress_list_container';
-import DressPage from './dress_page_container';
+import DressList from './dresses/dress_list_container';
+import DressPage from './dresses/dress_page_container';
 import UserList from './user_list_container';
-import DressForm from './dress_form';
+import DressForm from './dresses/dress_form';
 
 const App = () => {
   return (

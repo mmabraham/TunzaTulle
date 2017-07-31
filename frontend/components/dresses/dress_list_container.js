@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { asArray } from '../reducers/selectors'
-import { fetchDresses } from '../actions/dress_actions';
+import { asArray } from '../../reducers/selectors'
+import { fetchDresses } from '../../actions/dress_actions';
 import DressList from './dress_list';
 
 const mapStateToProps = state => {

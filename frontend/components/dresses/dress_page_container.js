@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchDress } from '../actions/dress_actions';
+import { fetchDress } from '../../actions/dress_actions';
 import DressPage from './dress_page';
 
 const mapStateToProps = (state, {match}) => {
