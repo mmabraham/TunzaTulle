@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import SearchBar from './search_bar';
+import { updateFilter, clearFilters } from '../../actions/filter_actions';
 
 const mapStateToProps = state => {
   return {
@@ -9,7 +10,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    updateFilter: (filterType, filter) => dispatch(updateFilter(filterType, filter)),
   }
 }
 
