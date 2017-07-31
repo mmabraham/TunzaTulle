@@ -19,7 +19,7 @@ class Api::DressesController < ApplicationController
   end
 
   def update
-
+    @dress = Dress.find(params[:id])
   end
 
   def destoy
