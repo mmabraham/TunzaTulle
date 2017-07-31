@@ -32,4 +32,41 @@ class Dress < ActiveRecord::Base
   has_many :customers,
     through: :orders,
     source: :customer
+
+  def self.filters(filters)
+    dresses = Dress.all
+    return dresses unless filters
+    dresses = Dress.by_dates(filters[:dates], dresses) if filters[:dates]
+    dresses = Dress.by_height(filters[:height], dresses) if filters[:height]
+    dresses = Dress.by_waist(filters[:waist], dresses) if filters[:waist]
+    dresses = Dress.by_price(filters[:price], dresses) if filters[:price]
+  end
+
+  private
+
+  def self.by_dates(dates, dresses = Dress.all)
+    start = Time.parse(dates[:start_date])
+    finish = Time.parse(dates[:end_date])
+
+    dresses.where.not(
+      id: Order.select('dress_id').where('start_date <= ? AND end_date >= ?', finish, start)
+    )
+  end
+
+  def self.by_height(height, dresses)
+    dresses.where(height: height)
+  end
+
+  def self.by_waist(waist, dresses)
+    dresses
+      .where('min_waist <= ?', waist)
+      .where('max_waist >= ?', waist)
+  end
+
+  def self.by_price(price, dresses)
+    min, max = price[:min], price[:max]
+    dresses
+    .where('price <= ?', max)
+    .where('price >= ?', min || 0)
+  end
 end
