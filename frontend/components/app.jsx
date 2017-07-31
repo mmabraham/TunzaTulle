@@ -7,7 +7,7 @@ import Drawer from './drawer_container';
 import DressList from './dresses/dress_list_container';
 import DressPage from './dresses/dress_page_container';
 import UserList from './user_list_container';
-import DressForm from './dresses/dress_form';
+import DressForm from './dresses/dress_form_container';
 
 const App = () => {
   return (

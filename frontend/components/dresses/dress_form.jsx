@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class DressForm extends React.Component {
   constructor(props) {
@@ -7,6 +8,7 @@ export default class DressForm extends React.Component {
 
     this.state = {}
     this.handleFileChange = this.handleFileChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(field) {
@@ -30,7 +32,7 @@ export default class DressForm extends React.Component {
   }
 
   handleSubmit() {
-    this.submit(state);
+    this.props.submit(this.state);
   }
 
   render() {
@@ -82,6 +84,11 @@ export default class DressForm extends React.Component {
         <img src={this.state.imagePreviewUrl}/>
       ) : null
     }
+    <RaisedButton
+      label="Save"
+      primary={true}
+      onClick={this.handleSubmit}
+    />
       </form>
     )
   }
