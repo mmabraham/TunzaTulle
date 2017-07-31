@@ -1,6 +1,9 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import CurrencyInput from 'react-currency-input';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 export default class DressForm extends React.Component {
   constructor(props) {
@@ -12,8 +15,8 @@ export default class DressForm extends React.Component {
   }
 
   handleChange(field) {
-    return (e) => {
-      this.setState({[field]: e.target.value})
+    return (e, i, val) => {
+      this.setState({[field]: e.target.value || val})
     }
   }
 
@@ -22,17 +25,22 @@ export default class DressForm extends React.Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      this.setState({
-        image: file,
-        imagePreviewUrl: reader.result,
-      });
+      this.setState({image: reader.result});
     }
 
     reader.readAsDataURL(file)
   }
 
   handleSubmit() {
-    this.props.submit(this.state);
+    const dress = this.state;
+    dress.price = this.formatPrice()
+    this.props.submit(dress)
+      .then()
+  }
+
+  formatPrice() {
+    const price = this.state.price.replace(/[.,$]/g, '');
+    return parseInt(price, 10);
   }
 
   render() {
@@ -56,7 +64,13 @@ export default class DressForm extends React.Component {
           errorText={ errors ? errors.title : '' }
         />
 
-      add color select here
+        <TextField
+          fullWidth={true}
+          floatingLabelText="Color"
+          onChange={this.handleChange('color')}
+          value={this.state.color || this.props.color }
+          errorText={ errors ? errors.color : '' }
+        />
 
         <TextField
           fullWidth={true}
@@ -66,12 +80,56 @@ export default class DressForm extends React.Component {
           errorText={ errors ? errors.description : '' }
         />
 
+      <TextField
+        fullWidth={true}
+        floatingLabelText="Price"
+        >
+        <CurrencyInput
+          value={this.state.price}
+          onChangeEvent={this.handleChange('price')}
+          prefix="$"
+          />
+      </TextField>
 
-      add image here
-      add price here
+      <TextField
+        floatingLabelText="Waist"
+        onChange={this.handleChange('waist')}
+        value={this.state.waist || this.props.waist }
+        errorText={ errors ? errors.waist : '' }
+      />
 
-      add all measurements
-      add sleeve_length
+      <TextField
+        floatingLabelText="Min Waist"
+        onChange={this.handleChange('min_waist')}
+        value={this.state.min_waist || this.props.min_waist || (this.state.waist && this.state.waist)}
+        errorText={ errors ? errors.min_waist : '' }
+      />
+
+      <TextField
+        floatingLabelText="Waist Stretch"
+        onChange={this.handleChange('max_waist')}
+        value={this.state.max_waist || this.props.max_waist || (this.state.waist && this.state.waist + '.5')}
+        errorText={ errors ? errors.max_waist : '' }
+      />
+
+      <TextField
+        floatingLabelText="Height"
+        onChange={this.handleChange('height')}
+        value={this.state.height || this.props.height}
+        errorText={ errors ? errors.height : '' }
+      />
+
+
+      <SelectField
+        fullWidth={true}
+        floatingLabelText="Sleeve Length"
+        value={this.state.sleeve_length}
+        onChange={this.handleChange('sleeve_length')}
+      >
+        <MenuItem value={'long'} primaryText="Long" />
+        <MenuItem value={'half length'} primaryText="Half Length" />
+        <MenuItem value={'3 / 4'} primaryText="3 / 4" />
+      </SelectField>
 
       <TextField
         type="file"
@@ -80,8 +138,8 @@ export default class DressForm extends React.Component {
         errorText={ errors ? errors.description : '' }
       />
     {
-      this.state.imagePreviewUrl ? (
-        <img src={this.state.imagePreviewUrl}/>
+      this.state.image ? (
+        <img src={this.state.image}/>
       ) : null
     }
     <RaisedButton

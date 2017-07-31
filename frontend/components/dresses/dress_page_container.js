@@ -4,7 +4,6 @@ import { fetchDress } from '../../actions/dress_actions';
 import DressPage from './dress_page';
 
 const mapStateToProps = (state, {match}) => {
-  debugger
   return {
     dress: state.dresses[match.params.id],
   }

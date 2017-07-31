@@ -10,7 +10,12 @@ class Api::DressesController < ApplicationController
   end
 
   def create
-
+    @dress = Dress.new(dress_params)
+    if @dress.save
+      render :show
+    else
+      render json: @dress.errors, status: 422
+    end
   end
 
   def update
@@ -25,6 +30,6 @@ class Api::DressesController < ApplicationController
 
   def dress_params
     params.require(:dress).permit(:title, :color, :waist, :min_waist,
-      :max_waist, :sleeve_length, :height)
+      :max_waist, :sleeve_length, :height, :image)
   end
 end

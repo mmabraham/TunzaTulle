@@ -18,5 +18,6 @@ export const createDress = dress => {
     method: 'POST',
     url: `/api/dresses`,
     data: { dress },
+    error: res => console.log(res),
   })
 }
