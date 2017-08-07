@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import { NavLink } from 'react-router-dom';
 // import OrderList from './order_list';
 
 export default class DressPage extends React.Component {
@@ -31,7 +32,9 @@ export default class DressPage extends React.Component {
         </CardText>
         <CardActions>
           <FlatButton label="Delete Dress" />
-          <FlatButton label="Create Order" />
+          <NavLink to="/orders/new">
+            <FlatButton label="Create Order" />
+          </NavLink>
         </CardActions>
       </Card>
     )
