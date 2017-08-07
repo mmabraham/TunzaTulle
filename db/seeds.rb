@@ -44,3 +44,23 @@ dresses = []
     image: images[i]
   )
 end
+
+Order.destroy_all
+orders = []
+
+seconds_in_day = 60 * 60 * 24
+seconds_in_week = seconds_in_day * 7
+base = Time.now - seconds_in_week * 20
+
+200.times do |i|
+  event_date = base + seconds_in_day * i
+  order = Order.new(
+    status: ['pending', 'approved', 'shipped', 'returned'].sample,
+    event_date: event_date,
+    start_date: event_date - seconds_in_week,
+    end_date: event_date + seconds_in_week
+  )
+  order.customer = customers.sample
+  order.save
+  orders << order
+end

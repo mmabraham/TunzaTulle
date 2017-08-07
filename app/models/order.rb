@@ -14,13 +14,14 @@
 
 class Order < ActiveRecord::Base
   before_save :ensure_customer!
-  validates :dress, :event_date, :start_date, :end_date,
+  validates :event_date, :start_date, :end_date,
     presence: true
   validates :status, inclusion: ['pending', 'approved', 'shipped', 'returned']
 
   scope :active, -> { where('? BETWEEN start_date AND end_date', Time.now) }
   scope :past, -> { where('end_date < ?', Time.now) }
   scope :future, -> { where('start_date > ?', Time.now) }
+
 
   belongs_to :customer
   has_many :dress_orders
