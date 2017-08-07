@@ -25,9 +25,10 @@ export default class DressList extends React.Component {
     return (
       <main className="dress-list-page">
         <SearchBar />
-        <NavLink to="/dresses/new" ><MenuItem>Add Dress</MenuItem></NavLink>
-        <GridList cellHeight={400} cols={2} padding={4}>{dresses}</GridList>
+        <GridList cellHeight={600} cols={4} padding={4}>{dresses}</GridList>
       </main>
     )
   }
  }
+
+ // <NavLink to="/dresses/new" ><MenuItem>Add Dress</MenuItem></NavLink>

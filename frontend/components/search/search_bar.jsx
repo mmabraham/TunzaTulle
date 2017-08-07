@@ -32,7 +32,7 @@ export default class SearchBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="search-bar">
         <DateRangePicker
           startDate={this.state.startDate}
           endDate={this.state.endDate}
