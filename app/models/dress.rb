@@ -33,7 +33,7 @@ class Dress < ActiveRecord::Base
     through: :orders,
     source: :customer
 
-  def self.filters(filters)
+  def self.filter(filters)
     dresses = Dress.all
     return dresses unless filters
     dresses = Dress.by_dates(filters[:dates], dresses) if filters[:dates]
@@ -42,6 +42,7 @@ class Dress < ActiveRecord::Base
     dresses = Dress.by_price(filters[:price], dresses) if filters[:price]
     dresses = Dress.by_sleeve_length(filters[:sleeve_length], dresses) if filters[:sleeve_length]
     dresses = Dress.by_color(filters[:color], dresses) if filters[:color]
+    dresses
   end
 
   private

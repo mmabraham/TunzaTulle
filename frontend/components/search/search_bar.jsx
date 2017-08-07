@@ -1,7 +1,9 @@
 import React from 'react';
 import { DateRangePicker } from 'react-dates';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import SelectField from 'material-ui/SelectField';
+import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/MenuItem';
 
 export default class SearchBar extends React.Component {
@@ -23,14 +25,14 @@ export default class SearchBar extends React.Component {
 
   handleFilterChange(filterType) {
     return (e, i, val) => {
-      this.setState({[filterType]: val});
-      this.props.updateFilter(filterType, val);
+      this.setState({[filterType]: val || e.target.value});
+      this.props.updateFilter(filterType, val || e.target.value);
     }
   }
 
   render() {
     return (
-      <Toolbar>
+      <div>
         <DateRangePicker
           startDate={this.state.startDate}
           endDate={this.state.endDate}
@@ -38,6 +40,7 @@ export default class SearchBar extends React.Component {
           focusedInput={this.state.focusedInput}
           onFocusChange={focusedInput => this.setState({ focusedInput })}
         />
+
         <SelectField
           value={this.state.sleeve_length}
           onChange={this.handleFilterChange('sleeve_length')}
@@ -47,7 +50,30 @@ export default class SearchBar extends React.Component {
           <MenuItem value={'half length'} primaryText="Half Length" />
           <MenuItem value={'3 / 4'} primaryText="3 / 4" />
         </SelectField>
-      </Toolbar>
+
+        <TextField
+          floatingLabelText="Waist"
+          onChange={this.handleFilterChange('waist')}
+          value={this.state.waist || this.props.waist }
+        />
+
+        <TextField
+          floatingLabelText="Height"
+          onChange={this.handleFilterChange('height')}
+          value={this.state.height || this.props.height}
+        />
+    </div>
     )
   }
 }
+
+//
+// <RadioButtonGroup
+//   valueSelected={this.state.sleeve_length}
+//   onChange={this.handleFilterChange('sleeve_length')}
+//   >
+//   <MenuItem value={null} label="Sleeve length"/>
+//   <MenuItem value={'long'} label="Long" />
+//   <MenuItem value={'half length'} label="Half Length" />
+//   <MenuItem value={'3 / 4'} label="3 / 4" />
+// </RadioButtonGroup>
