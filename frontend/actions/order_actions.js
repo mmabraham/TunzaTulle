@@ -3,7 +3,7 @@ import * as Util from '../util/order_api_util';
 export const RECEIVE_ORDERS = 'RECEIVE_ORDERS';
 export const RECEIVE_ORDER = 'RECEIVE_ORDER';
 
-export const receiveOrders = orders => {
+export const receiveOrders = ({orders}) => {
   return {
     type: RECEIVE_ORDERS,
     orders,

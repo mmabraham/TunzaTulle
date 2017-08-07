@@ -69,11 +69,12 @@ DressOrder.destroy_all
 dress_count = dresses.length
 dress_idx = 0
 orders.each do |order|
-  while [true, true, false].sample
+  loop do
     dress_order = DressOrder.new
     dress_order.dress = dresses[dress_idx % dress_count]
     order.dress_orders << dress_order
     dress_idx += 1
+    break if [true, false].sample
   end
   order.save
 end
