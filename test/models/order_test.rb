@@ -4,7 +4,6 @@
 #
 #  id          :integer          not null, primary key
 #  customer_id :integer          not null
-#  dress_id    :integer          not null
 #  event_date  :datetime         not null
 #  start_date  :datetime         not null
 #  end_date    :datetime         not null

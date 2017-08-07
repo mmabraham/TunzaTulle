@@ -28,10 +28,9 @@ class Dress < ActiveRecord::Base
   has_attached_file :image, default_url: "missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
-  has_many :orders
-  has_many :customers,
-    through: :orders,
-    source: :customer
+  has_many :dress_orders
+  has_many :orders, through: :dress_orders, source: :order
+  has_many :customers, through: :orders, source: :customer
 
   def self.filter(filters)
     dresses = Dress.all
