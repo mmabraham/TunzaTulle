@@ -51,7 +51,7 @@ class Dress < ActiveRecord::Base
     finish = Time.parse(dates[:end_date])
 
     dresses.where.not(
-      id: Order.select('dress_id').where('start_date <= ? AND end_date >= ?', finish, start)
+      id: Order.conflicting(start, finish).joins(:dress_orders).select('dress_orders.dress_id')
     )
   end
 

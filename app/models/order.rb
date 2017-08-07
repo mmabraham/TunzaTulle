@@ -21,6 +21,9 @@ class Order < ActiveRecord::Base
   scope :active, -> { where('? BETWEEN start_date AND end_date', Time.now) }
   scope :past, -> { where('end_date < ?', Time.now) }
   scope :future, -> { where('start_date > ?', Time.now) }
+  scope :conflicting, ->(start_date, end_date) {
+    where('start_date <= ? AND end_date >= ?', end_date, start_date)
+  }
 
 
   belongs_to :customer
