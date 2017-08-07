@@ -18,6 +18,10 @@ class Order < ActiveRecord::Base
     presence: true
   validates :status, inclusion: ['pending', 'approved', 'shipped', 'returned']
 
+  scope :active, -> { where('? BETWEEN start_date AND end_date', Time.now) }
+  scope :past, -> { where('end_date < ?', Time.now) }
+  scope :future, -> { where('start_date > ?', Time.now) }
+
   belongs_to :customer
   has_many :dress_orders
   has_many :dresses, through: :dress_orders, source: :dress
