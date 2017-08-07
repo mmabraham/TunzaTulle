@@ -38,7 +38,6 @@ column name    | data type | details
 ---------------|-----------|-----------------------
 id             | integer   | not null, primary key
 customer_id    | integer   | not null, foreign key (references users), indexed
-dress_order_id | integer   | not null, foreign key (references dress_orders), indexed
 event_date     | date      | not null
 start_date     | date      | not null
 end_date       | date      | not null
