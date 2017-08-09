@@ -21,3 +21,12 @@ export const createDress = dress => {
     error: res => console.log(res),
   })
 }
+
+export const updateDress = (dress, id) => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `/api/dresses/${id}`,
+    data: { dress },
+    error: res => console.log(res),
+  })
+}

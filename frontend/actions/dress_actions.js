@@ -30,3 +30,7 @@ export const fetchDress = id => dispatch => {
 export const createDress = dress => dispatch => {
   return Util.createDress(dress)
 }
+
+export const updateDress = (dress, id) => dispatch => {
+  return Util.updateDress(dress, id)
+}

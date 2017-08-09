@@ -1,15 +1,21 @@
 import DressForm from './dress_form';
-import { createDress } from '../../actions/dress_actions';
+import { createDress, updateDress } from '../../actions/dress_actions';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
+  const id = ownProps.match.params.id;
+  debugger
   return {
-    // id: ownProps.location.id,
+    id,
+    dress: state.dresses[id]
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const id = ownProps.match.params.id;
+  return ownProps.action === 'edit' ? {
+    submit: (dress) => dispatch(updateDress(dress)),
+  } : {
     submit: (dress) => dispatch(createDress(dress)),
   }
 }

@@ -23,6 +23,7 @@ const App = () => {
     <Switch>
       <ProtectedRoute path='/users' component={UserList} />
       <ProtectedRoute exact path='/dresses/new' component={DressForm} />
+      <ProtectedRoute exact path='/dresses/edit/:id' action='edit'component={DressForm} />
       <ProtectedRoute path='/dresses/:id' component={DressPage} />
       <ProtectedRoute exact path='/dresses' component={DressList} />
       <ProtectedRoute path='/orders/new' component={OrderForm} />
