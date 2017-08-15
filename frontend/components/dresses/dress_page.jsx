@@ -3,7 +3,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FlatButton from 'material-ui/FlatButton';
 import { NavLink } from 'react-router-dom';
 import ConfirmDialog from '../confirm_dialog';
-// import OrderList from './order_list';
+import OrderList from '../orders/order_list';
 
 export default class DressPage extends React.Component {
   constructor(props) {
