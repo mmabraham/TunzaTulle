@@ -30,3 +30,10 @@ export const updateDress = (dress, id) => {
     error: res => console.log(res),
   })
 }
+
+export const deleteDress = id => {
+  return $.ajax({
+    method: 'DELETE',
+    url: `/api/dresses/${id}`,
+  })
+}
