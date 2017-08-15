@@ -42,6 +42,7 @@ export default class DressPage extends React.Component {
             <FlatButton label="Create Order" />
           </NavLink>
         </CardActions>
+        <h1>Orders</h1>
         <OrderList orders={dress.orders}/>
       </Card>
     )

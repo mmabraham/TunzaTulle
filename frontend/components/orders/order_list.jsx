@@ -14,7 +14,6 @@ export default class OrderList extends React.Component {
   }
 
   render() {
-    debugger
     if (!this.props.orders) return null;
     const orders = this.props.orders.map(order => (
       <OrderListItem
