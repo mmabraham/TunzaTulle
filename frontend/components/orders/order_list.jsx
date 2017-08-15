@@ -10,10 +10,12 @@ export default class OrderList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchOrders()
+    this.props.fetchOrders && this.props.fetchOrders();
   }
 
   render() {
+    debugger
+    if (!this.props.orders) return null;
     const orders = this.props.orders.map(order => (
       <OrderListItem
         order={order}

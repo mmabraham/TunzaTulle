@@ -1,9 +1,7 @@
 json.orders do
   orders.each do |order|
     json.set! order.id do
-      json.extract! order, :id, :event_date, :start_date, :end_date, :status
-      json.dress_ids order.dress_orders, :dress_id
-      json.customer_id order.customer.id
+      json.partial! 'api/orders/order', order: order
     end
   end
 end

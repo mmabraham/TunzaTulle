@@ -15,6 +15,7 @@ export default class DressPage extends React.Component {
   }
 
   render() {
+    debugger
     const dress = this.props.dress;
     return !dress ? (null) : (
       <Card>
@@ -42,6 +43,7 @@ export default class DressPage extends React.Component {
             <FlatButton label="Create Order" />
           </NavLink>
         </CardActions>
+        <OrderList orders={dress.orders}/>
       </Card>
     )
   }
