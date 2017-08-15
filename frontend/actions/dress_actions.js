@@ -34,3 +34,7 @@ export const createDress = dress => dispatch => {
 export const updateDress = (dress, id) => dispatch => {
   return Util.updateDress(dress, id)
 }
+
+export const deleteDress = id => dispatch => {
+  return Util.deleteDress(id)
+}
