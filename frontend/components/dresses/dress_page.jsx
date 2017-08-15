@@ -22,7 +22,12 @@ export default class DressPage extends React.Component {
           subtitle={dress.color}
         />
         <CardMedia
-          overlay={<CardTitle title={`${dress.waist} - ${dress.height}`} subtitle={`$ ${dress.price}`} />}
+          overlay={
+            <CardTitle
+              title={`${dress.waist} - ${dress.height}`}
+              subtitle={`$ ${parseInt(dress.price / 100, 10)}.${parseInt(dress.price % 100, 10)}`}
+            />
+          }
         >
           <img src={dress.img} alt={dress.description} />
         </CardMedia>

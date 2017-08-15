@@ -19,7 +19,7 @@ export default class DressForm extends React.Component {
     if (this.props.id) { // editing existing dress
       this.props.fetchDress()
         .then(() => {
-          this.props.dress.price = this.props.dress.price / 100
+          this.props.dress.price = `${this.props.dress.price / 100}`
           this.setState(this.props.dress)
         })
     }
@@ -43,8 +43,16 @@ export default class DressForm extends React.Component {
   }
 
   handleSubmit() {
-    this.props.submit(this.state)
+    const dress = Object.assign(
+      {}, this.state, { price: this.formatPrice()}
+    );
+    this.props.submit(dress)
       .then(id => this.props.history.push(`/dresses/${id}`));
+  }
+
+  formatPrice() {
+    const price = this.state.price.replace(/[.,$]/g, '');
+    return parseInt(price, 10);
   }
 
   render() {
