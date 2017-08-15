@@ -16,9 +16,12 @@ export default class DressForm extends React.Component {
   }
 
   componentDidMount() {
-    debugger
-    if (this.props.id) {
-      this.props.fetchDress().then(() => this.setState(this.props.dress))
+    if (this.props.id) { // editing existing dress
+      this.props.fetchDress()
+        .then(() => {
+          this.props.dress.price = this.props.dress.price / 100
+          this.setState(this.props.dress)
+        })
     }
   }
 
@@ -40,14 +43,14 @@ export default class DressForm extends React.Component {
   }
 
   handleSubmit() {
-    const dress = this.state;
-    dress.price = this.formatPrice()
+    const dress = Object.assign(
+      {}, this.state, { price: this.formatPrice()}
+    );
     this.props.submit(dress)
-      .then(() => console.log(dress))
+      .then(() => console.log(dress));
   }
 
   formatPrice() {
-    debugger;
     const price = this.state.price.replace(/[.,$]/g, '');
     return parseInt(price, 10);
   }
