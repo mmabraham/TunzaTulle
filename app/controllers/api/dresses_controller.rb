@@ -21,7 +21,7 @@ class Api::DressesController < ApplicationController
   def update
     @dress = Dress.find(params[:id])
     if @dress.update(dress_params)
-      render :show
+      render json: @dress.id
     else
       render json: @dress.errors, status: 422
     end

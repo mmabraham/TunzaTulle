@@ -1,6 +1,7 @@
 import DressForm from './dress_form';
 import { createDress, updateDress, fetchDress } from '../../actions/dress_actions';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
@@ -20,4 +21,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DressForm)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(DressForm)
+)

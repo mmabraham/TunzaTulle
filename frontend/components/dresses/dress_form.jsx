@@ -43,16 +43,8 @@ export default class DressForm extends React.Component {
   }
 
   handleSubmit() {
-    const dress = Object.assign(
-      {}, this.state, { price: this.formatPrice()}
-    );
-    this.props.submit(dress)
-      .then(() => console.log(dress));
-  }
-
-  formatPrice() {
-    const price = this.state.price.replace(/[.,$]/g, '');
-    return parseInt(price, 10);
+    this.props.submit(this.state)
+      .then(id => this.props.history.push(`/dresses/${id}`));
   }
 
   render() {
