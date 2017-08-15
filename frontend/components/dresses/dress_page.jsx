@@ -36,7 +36,7 @@ export default class DressPage extends React.Component {
           {dress.description}
         </CardText>
         <CardActions>
-          <FlatButton label="Delete Dress" />
+          <FlatButton label="Delete Dress" onClick={this.props.deleteDress}/>
           <NavLink to="/orders/new">
             <FlatButton label="Create Order" />
           </NavLink>
