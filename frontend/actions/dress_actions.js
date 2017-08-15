@@ -23,6 +23,7 @@ export const fetchDresses = filters => dispatch => {
 }
 
 export const fetchDress = id => dispatch => {
+  debugger
   return Util.fetchDress(id)
     .then((dress) => dispatch(receiveDress(dress)))
 }

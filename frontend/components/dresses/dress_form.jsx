@@ -15,6 +15,13 @@ export default class DressForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    debugger
+    if (this.props.id) {
+      this.props.fetchDress().then(() => this.setState(this.props.dress))
+    }
+  }
+
   handleChange(field) {
     return (e, i, val) => {
       this.setState({[field]: e.target.value || val})
@@ -36,10 +43,11 @@ export default class DressForm extends React.Component {
     const dress = this.state;
     dress.price = this.formatPrice()
     this.props.submit(dress)
-      .then()
+      .then(() => console.log(dress))
   }
 
   formatPrice() {
+    debugger;
     const price = this.state.price.replace(/[.,$]/g, '');
     return parseInt(price, 10);
   }
@@ -140,8 +148,8 @@ export default class DressForm extends React.Component {
             errorText={ errors ? errors.description : '' }
             />
           {
-            this.state.image ? (
-              <img src={this.state.image}/>
+            this.state.image || this.state.img? (
+              <img src={this.state.image || this.state.img}/>
             ) : null
           }
           <RaisedButton

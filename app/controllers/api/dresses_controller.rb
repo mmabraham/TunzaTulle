@@ -20,6 +20,11 @@ class Api::DressesController < ApplicationController
 
   def update
     @dress = Dress.find(params[:id])
+    if @dress.update(dress_params)
+      render :show
+    else
+      render json: @dress.errors, status: 422
+    end
   end
 
   def destoy
@@ -30,6 +35,7 @@ class Api::DressesController < ApplicationController
 
   def dress_params
     params.require(:dress).permit(:title, :color, :waist, :min_waist,
-      :max_waist, :sleeve_length, :height, :image)
+      :max_waist, :sleeve_length, :height, :image, :description, :price,
+      :barcode)
   end
 end

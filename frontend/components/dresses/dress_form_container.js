@@ -1,10 +1,9 @@
 import DressForm from './dress_form';
-import { createDress, updateDress } from '../../actions/dress_actions';
+import { createDress, updateDress, fetchDress } from '../../actions/dress_actions';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
-  debugger
   return {
     id,
     dress: state.dresses[id]
@@ -13,8 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const id = ownProps.match.params.id;
-  return ownProps.action === 'edit' ? {
-    submit: (dress) => dispatch(updateDress(dress)),
+  return id ? {
+    submit: (dress) => dispatch(updateDress(dress, id)),
+    fetchDress: () => dispatch(fetchDress(id)),
   } : {
     submit: (dress) => dispatch(createDress(dress)),
   }
