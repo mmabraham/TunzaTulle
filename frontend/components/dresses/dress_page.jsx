@@ -15,7 +15,6 @@ export default class DressPage extends React.Component {
   }
 
   render() {
-    debugger
     const dress = this.props.dress;
     return !dress ? (null) : (
       <Card>
