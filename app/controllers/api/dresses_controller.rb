@@ -27,8 +27,13 @@ class Api::DressesController < ApplicationController
     end
   end
 
-  def destoy
-
+  def destroy
+    @dress = Dress.find(params[:id])
+    if @dress.destroy
+      render json: @dress.id
+    else
+      render json: @dress.errors, status: 422
+    end
   end
 
   private
