@@ -3,19 +3,19 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
-/**
- * Alerts are urgent interruptions, requiring acknowledgement, that inform the user about a situation.
- */
 export default class ConfirmDialog extends React.Component {
-  state = {
-    open: false,
-  };
+  constructor(props) {
+    super(props)
+    this.state = { open: false };
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+  }
 
-  handleOpen = () => {
+  handleOpen() {
     this.setState({open: true});
   };
 
-  handleClose = () => {
+  handleClose() {
     this.setState({open: false});
   };
 
@@ -27,7 +27,7 @@ export default class ConfirmDialog extends React.Component {
         onClick={this.handleClose}
       />,
       <FlatButton
-        label={this.props.text}
+        label="Confirm"
         primary={true}
         onClick={this.props.onConfirm}
       />,
@@ -35,14 +35,14 @@ export default class ConfirmDialog extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="Alert" onClick={this.handleOpen} />
+        <RaisedButton label={this.props.text} onClick={this.handleOpen} />
         <Dialog
           actions={actions}
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-          Discard draft?
+          {`${this.props.text}?`}
         </Dialog>
       </div>
     );

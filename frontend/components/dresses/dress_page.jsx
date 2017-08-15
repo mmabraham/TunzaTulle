@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import { NavLink } from 'react-router-dom';
+import ConfirmDialog from '../confirm_dialog';
 // import OrderList from './order_list';
 
 export default class DressPage extends React.Component {
@@ -36,7 +37,7 @@ export default class DressPage extends React.Component {
           {dress.description}
         </CardText>
         <CardActions>
-          <FlatButton label="Delete Dress" onClick={this.props.deleteDress}/>
+          <ConfirmDialog text="Delete This Dress" onConfirm={this.props.deleteDress}/>
           <NavLink to="/orders/new">
             <FlatButton label="Create Order" />
           </NavLink>
