@@ -5,7 +5,7 @@ import OrderForm from './order_form';
 
 const mapStateToProps = state => {
   return {
-
+    errors: state.errors,
   }
 }
 

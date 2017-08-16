@@ -42,6 +42,7 @@ export default class OrderForm extends React.Component {
   }
 
   render() {
+    const errors = this.props.errors;
     return (
       <form>
         <DatePicker
@@ -49,25 +50,29 @@ export default class OrderForm extends React.Component {
           autoOk={true}
           onChange={this.handleEventChange}
           value={this.state.event_date}
+          errorText={ errors ? errors.event_date : '' }
         />
         <DatePicker
           floatingLabelText="Shipping Date"
           autoOk={true}
           onChange={this.handleChange('start_date')}
           value={this.state.start_date}
+          errorText={ errors ? errors.start_date : '' }
         />
         <DatePicker
           floatingLabelText="Return-By Date"
           autoOk={true}
           onChange={this.handleChange('end_date')}
           value={this.state.end_date}
+          errorText={ errors ? errors.end_date : '' }
         />
         <SelectField
           fullWidth={true}
           floatingLabelText="Status"
           value={this.state.status}
           onChange={this.handleChange('status')}
-          >
+          errorText={ errors ? errors.status : '' }
+        >
           <MenuItem value={'pending'} primaryText="Pending" />
           <MenuItem value={'approved'} primaryText="Approved" />
           <MenuItem value={'shipped'} primaryText="Shipped" />
