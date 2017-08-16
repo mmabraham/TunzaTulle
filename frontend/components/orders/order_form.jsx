@@ -33,8 +33,8 @@ export default class OrderForm extends React.Component {
   }
 
   handleEventChange(_, event_date) {
-    const start_date = new Date()
-    const end_date = new Date()
+    const start_date = new Date(event_date)
+    const end_date = new Date(event_date)
     start_date.setDate(event_date.getDate() - 7)
     end_date.setDate(event_date.getDate() + 7)
     this.setState({ event_date, start_date, end_date })

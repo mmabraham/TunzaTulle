@@ -14,9 +14,9 @@
 
 class Order < ActiveRecord::Base
   before_save :ensure_customer!
-  validates :event_date, :start_date, :end_date,
-    presence: true
-  validates :status, inclusion: ['pending', 'approved', 'shipped', 'returned']
+  validates :event_date, :start_date, :end_date, presence: true
+  validate :starts_before_event, :ends_after_event
+  validates :status, inclusion: ['pending', 'approved', 'shipped', 'returned', 'canceled']
 
   scope :active, -> { where('? BETWEEN start_date AND end_date', Time.now) }
   scope :past, -> { where('end_date < ?', Time.now) }
@@ -32,5 +32,13 @@ class Order < ActiveRecord::Base
 
   def ensure_customer!
     self.customer ||= Customer.new
+  end
+
+  def starts_before_event
+    errors.add(:start_date, 'cannot be after event date') if start_date > event_date
+  end
+
+  def ends_after_event
+    errors.add(:end_date, 'cannot be before event date') if end_date < event_date
   end
 end
