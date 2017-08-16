@@ -16,7 +16,7 @@ export const fetchOrder = id => {
 export const createOrder = order => {
   return $.ajax({
     method: 'POST',
-    url: `/api/order`,
+    url: `/api/orders`,
     data: { order },
     error: res => console.log(res),
   })

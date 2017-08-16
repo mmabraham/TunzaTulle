@@ -8,7 +8,7 @@ import DressList from './dresses/dress_list_container';
 import DressPage from './dresses/dress_page_container';
 import UserList from './user_list_container';
 import DressForm from './dresses/dress_form_container';
-import OrderForm from './orders/order_form';
+import OrderForm from './orders/order_form_container';
 import OrderList from './orders/order_list_container';
 
 
