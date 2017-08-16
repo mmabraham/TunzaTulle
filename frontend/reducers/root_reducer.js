@@ -4,6 +4,7 @@ import errors from './errors_reducer';
 import drawer from './drawer_reducer';
 import dresses from './dresses_reducer';
 import orders from './orders_reducer';
+import customers from './customers_reducer';
 import users from './users_reducer';
 import filters from './filters_reducer';
 
@@ -15,4 +16,5 @@ export default combineReducers({
   users,
   filters,
   orders,
+  customers,
 });
