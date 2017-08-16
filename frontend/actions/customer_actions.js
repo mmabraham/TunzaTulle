@@ -3,7 +3,7 @@ import * as Util from '../util/customer_api_util';
 export const RECEIVE_CUSTOMERS = 'RECEIVE_CUSTOMERS';
 export const RECEIVE_CUSTOMER = 'RECEIVE_CUSTOMER';
 
-export const receiveCustomers = ({customers}) => {
+export const receiveCustomers = (customers) => {
   return {
     type: RECEIVE_CUSTOMERS,
     customers,

@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomersListItem from './customer_list_item';
+import CustomerListItem from './customer_list_item';
 import Paper from 'material-ui/Paper';
 import Menu from 'material-ui/Menu';
 
@@ -10,13 +10,13 @@ export default class CustomersList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchCustomers && this.props.fetchCustomerss();
+    this.props.fetchCustomers && this.props.fetchCustomers();
   }
 
   render() {
     if (!this.props.customers) return null;
     const customers = this.props.customers.map(customer => (
-      <CustomersListItem
+      <CustomerListItem
         customer={customer}
         key={customer.id}
       />

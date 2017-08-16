@@ -10,7 +10,7 @@ import UserList from './user_list_container';
 import DressForm from './dresses/dress_form_container';
 import OrderForm from './orders/order_form_container';
 import OrderList from './orders/order_list_container';
-
+import CustomerList from './customers/customer_list_container';
 
 const App = () => {
   return (
@@ -28,6 +28,7 @@ const App = () => {
       <ProtectedRoute exact path='/dresses' component={DressList} />
       <ProtectedRoute path='/orders/new' component={OrderForm} />
       <ProtectedRoute exact path='/orders' component={OrderList} />
+      <ProtectedRoute exact path='/customers' component={CustomerList} />
     </Switch>
   </header>
  </div>
