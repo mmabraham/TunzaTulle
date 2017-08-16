@@ -3,6 +3,7 @@ import SelectField from 'material-ui/SelectField';
 import DatePicker from 'material-ui/DatePicker';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import CustomerSelect from '../customers/customer_select_container';
 
 export default class OrderForm extends React.Component {
   constructor(props) {
@@ -79,6 +80,8 @@ export default class OrderForm extends React.Component {
           <MenuItem value={'returned'} primaryText="Returned" />
           <MenuItem value={'canceled'} primaryText="Canceled" />
         </SelectField>
+        <CustomerSelect onSelect={this.handleChange('customer_id')}/>
+        <br />
         <RaisedButton primary={true} onTouchTap={this.handleSubmit}>
           Save
         </RaisedButton>
