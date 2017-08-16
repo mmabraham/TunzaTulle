@@ -2,6 +2,7 @@ import React from 'react';
 import CustomerListItem from './customer_list_item';
 import Paper from 'material-ui/Paper';
 import Menu from 'material-ui/Menu';
+import { NavLink } from 'react-router-dom';
 
 export default class CustomersList extends React.Component {
   constructor(props) {
@@ -16,10 +17,11 @@ export default class CustomersList extends React.Component {
   render() {
     if (!this.props.customers) return null;
     const customers = this.props.customers.map(customer => (
-      <CustomerListItem
-        customer={customer}
-        key={customer.id}
-      />
+      <NavLink to={`/customers/${customer.id}`} key={customer.id}>
+        <CustomerListItem
+          customer={customer}
+        />
+      </NavLink>
     ))
     return (
       <Paper className="customer-list-page">
