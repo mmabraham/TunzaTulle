@@ -24,6 +24,7 @@ export default class OrderForm extends React.Component {
 
   handleSubmit() {
     this.props.createOrder(this.state)
+      .fail(res => this.props.receiveErrors(res.responseJSON));
   }
 
   handleChange(field) {
