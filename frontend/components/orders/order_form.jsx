@@ -1,14 +1,25 @@
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
+import DatePicker from 'material-ui/DatePicker';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 
 export default class OrderForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = this.props.order || {}
+    const event_date = new Date();
+    const start_date = new Date();
+    const end_date = new Date();
+    event_date.setDate(start_date.getDate() + 7)
+    end_date.setDate(event_date.getDate() + 7)
+    start_date.setHours(0, 0, 0, 0);
+    event_date.setHours(0, 0, 0, 0);
+    end_date.setHours(0, 0, 0, 0);
+
+    this.state = this.props.order || { event_date, start_date, end_date }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEventChange = this.handleEventChange.bind(this);
   }
 
   handleSubmit() {
@@ -17,13 +28,39 @@ export default class OrderForm extends React.Component {
 
   handleChange(field) {
     return (e, i, val) => {
-      this.setState({[field]: e.target.value || val})
+      this.setState({[field]: (e && e.target.value) || val || i })
     }
+  }
+
+  handleEventChange(_, event_date) {
+    const start_date = new Date()
+    const end_date = new Date()
+    start_date.setDate(event_date.getDate() - 7)
+    end_date.setDate(event_date.getDate() + 7)
+    this.setState({ event_date, start_date, end_date })
   }
 
   render() {
     return (
       <form>
+        <DatePicker
+          floatingLabelText="Wedding Date"
+          autoOk={true}
+          onChange={this.handleEventChange}
+          value={this.state.event_date}
+        />
+        <DatePicker
+          floatingLabelText="Shipping Date"
+          autoOk={true}
+          onChange={this.handleChange('start_date')}
+          value={this.state.start_date}
+        />
+        <DatePicker
+          floatingLabelText="Return-By Date"
+          autoOk={true}
+          onChange={this.handleChange('end_date')}
+          value={this.state.end_date}
+        />
         <SelectField
           fullWidth={true}
           floatingLabelText="Status"
