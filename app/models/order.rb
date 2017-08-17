@@ -35,10 +35,14 @@ class Order < ActiveRecord::Base
   end
 
   def starts_before_event
-    errors.add(:start_date, 'cannot be after event date') if start_date > event_date
+    errors.add(:start_date, 'cannot be after event date') if start_date && start_date > event_date
   end
 
   def ends_after_event
-    errors.add(:end_date, 'cannot be before event date') if end_date < event_date
+    errors.add(:end_date, 'cannot be before event date') if end_date && end_date < event_date
+  end
+
+  def dress_ids=(dress_ids)
+    self.dresses = Dress.find(dress_ids)
   end
 end

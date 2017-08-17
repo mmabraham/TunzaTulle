@@ -8,7 +8,7 @@ class Api::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
-      render json: @order
+      render json: @order.id
     else
       render json: @order.errors, status: 422
     end
@@ -16,7 +16,9 @@ class Api::OrdersController < ApplicationController
 
   def order_params
     params
-    .require(:order)
-    .permit(:status, :start_date, :end_date, :event_date, :customer_id)
+      .require(:order)
+      .permit(
+        :status, :start_date, :end_date, :event_date, :customer_id, dress_ids: []
+      )
   end
 end
