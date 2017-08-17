@@ -46,6 +46,8 @@ export default class OrderForm extends React.Component {
     const errors = this.props.errors;
     return (
       <form>
+        <CustomerSelect onSelect={this.handleChange('customer_id')}/>
+        <br />
         <DatePicker
           floatingLabelText="Wedding Date"
           autoOk={true}
@@ -80,8 +82,6 @@ export default class OrderForm extends React.Component {
           <MenuItem value={'returned'} primaryText="Returned" />
           <MenuItem value={'canceled'} primaryText="Canceled" />
         </SelectField>
-        <CustomerSelect onSelect={this.handleChange('customer_id')}/>
-        <br />
         <RaisedButton primary={true} onTouchTap={this.handleSubmit}>
           Save
         </RaisedButton>

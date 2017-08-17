@@ -1,6 +1,5 @@
 import React from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
-import CustomerListItem from './customer_list_item';
 
 export default class CustomerSelect extends React.Component {
   constructor(props) {
@@ -17,9 +16,7 @@ export default class CustomerSelect extends React.Component {
       return (
         {
           text: customer.name,
-          value: (
-            <CustomerListItem customer={customer} key={customer.id}/>
-          ),
+          value: customer.id,
         }
       )
     })
@@ -27,8 +24,7 @@ export default class CustomerSelect extends React.Component {
   }
 
   handleChange(customer, i) {
-    this.props.onSelect(null, i, customer && customer.value && customer.value.key )
-    console.log(customer)
+    this.props.onSelect(null, i, customer && customer.id )
   }
 
   render() {
@@ -36,8 +32,9 @@ export default class CustomerSelect extends React.Component {
       <AutoComplete
         floatingLabelText="Customer"
         openOnFocus={true}
+        maxSearchResults={5}
         dataSource={this.state.dataSource}
-        filter={AutoComplete.caseInsensitiveFilter}
+        filter={AutoComplete.fuzzyFilter}
         onNewRequest={this.handleChange.bind(this)}
       />
     ) : null;
