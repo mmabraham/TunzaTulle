@@ -29,4 +29,5 @@ export const fetchCustomer = id => dispatch => {
 
 export const createCustomer = customer => dispatch => {
   return Util.createCustomer(customer)
+    .then((customer) => dispatch(receiveCustomer(customer)))
 }

@@ -7,7 +7,7 @@ class Api::CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
-      render json: @customer
+      render :show
     else
       render json: @customer.errors
     end
