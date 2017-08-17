@@ -4,13 +4,13 @@ import CustomerForm from './customer_form';
 
 const mapStateToProps = state => {
   return {
-
+    errors: state.errors,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    createCustomer: customer => dispatch(createCustomer(customer)),
+    processForm: customer => dispatch(createCustomer(customer)),
   }
 }
 
