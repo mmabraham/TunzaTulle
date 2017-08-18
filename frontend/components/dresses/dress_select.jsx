@@ -7,7 +7,10 @@ import MenuItem from 'material-ui/MenuItem';
 export default class DressSelect extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedDresses: this.props.selectedDresses };
+    this.state = {
+      searchText: '',
+      selectedDresses: this.props.selectedDresses,
+    };
   }
 
   componentDidMount() {
@@ -31,7 +34,8 @@ export default class DressSelect extends React.Component {
     const selectedDress = this.props.dresses[i]
     if (!this.state.selectedDresses.includes(selectedDress)) {
       this.setState({
-        selectedDresses: this.state.selectedDresses.concat([selectedDress])
+        selectedDresses: this.state.selectedDresses.concat([selectedDress]),
+        searchText: '',
       })
       this.props.onSelect(null, i, this.state.selectedDresses.map(dress => dress.id));
     }
@@ -58,6 +62,7 @@ export default class DressSelect extends React.Component {
             dataSource={this.state.dataSource}
             filter={AutoComplete.fuzzyFilter}
             onNewRequest={this.handleChange.bind(this)}
+            searchText={this.state.searchText}
             />
         ) : null}
       </div>
