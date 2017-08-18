@@ -5,6 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import CustomerSelect from '../customers/customer_select_container';
 import CustomerForm from '../customers/customer_form_container';
+import DressSelect from '../dresses/dress_select_container';
 
 export default class OrderForm extends React.Component {
   constructor(props) {
@@ -47,6 +48,7 @@ export default class OrderForm extends React.Component {
     const errors = this.props.errors;
     return (
       <form>
+        <DressSelect />
         <CustomerSelect onSelect={this.handleChange('customer_id')}/>
         <CustomerForm />
         <br />

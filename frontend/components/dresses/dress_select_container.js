@@ -3,10 +3,10 @@ import { asArray, byIds } from '../../reducers/selectors'
 import { fetchDresses } from '../../actions/dress_actions';
 import DressSelect from './dress_select';
 
-const mapStateToProps = {state, ownProps} => {
+const mapStateToProps = (state, ownProps) => {
   return {
     dresses: asArray(state.dresses),
-    selectedDresses: byIds(state.dresses, ownProps.dress_ids),
+    selectedDresses: byIds(state.dresses, ownProps.dress_ids || []),
   }
 }
 
