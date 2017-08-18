@@ -18,7 +18,7 @@ export default class OrderForm extends React.Component {
     event_date.setHours(0, 0, 0, 0);
     end_date.setHours(0, 0, 0, 0);
 
-    this.state = this.props.order || { dress_ids: [152,157,154], event_date, start_date, end_date }
+    this.state = this.props.order || { event_date, start_date, end_date }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEventChange = this.handleEventChange.bind(this);
