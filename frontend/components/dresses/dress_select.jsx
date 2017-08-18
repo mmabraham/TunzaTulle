@@ -1,11 +1,13 @@
 import React from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import DressThumbnail from './dress_thumbnail';
+import { List, ListItem } from 'material-ui/List';
 import MenuItem from 'material-ui/MenuItem';
 
 export default class DressSelect extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { selectedDresses: this.props.selectedDresses };
   }
 
   componentDidMount() {
@@ -18,27 +20,47 @@ export default class DressSelect extends React.Component {
       return (
         {
           text: `${dress.barcode}  -  ${dress.title}`,
-          value: (<MenuItem><DressThumbnail dress={dress} /></MenuItem>)
+          value: (<MenuItem><DressThumbnail dress={dress} /></MenuItem>),
         }
       )
     })
     this.setState({dataSource: this.allDressItems})
   }
 
-  handleChange(dress, i) {
-    this.props.onSelect(null, i, dress && dress.id )
+  handleChange(item, i) {
+    const selectedDress = this.props.dresses[i]
+    if (!this.state.selectedDresses.includes(selectedDress)) {
+      this.setState({
+        selectedDresses: this.state.selectedDresses.concat([selectedDress])
+      })
+      this.props.onSelect(null, i, this.state.selectedDresses.map(dress => dress.id));
+    }
   }
 
   render() {
-    return this.allDressItems ? (
-      <AutoComplete
-        floatingLabelText="Dress"
-        openOnFocus={true}
-        maxSearchResults={5}
-        dataSource={this.state.dataSource}
-        filter={AutoComplete.fuzzyFilter}
-        onNewRequest={this.handleChange.bind(this)}
-      />
-    ) : null;
+    const selectedDressComponenets = this.state.selectedDresses.map(dress => {
+      return (
+      <ListItem key={dress.id} >
+        <DressThumbnail dress={dress} />
+      </ListItem>
+    )})
+
+    return (
+      <div>
+        <List>
+          {selectedDressComponenets}
+        </List>
+        {this.allDressItems ? (
+          <AutoComplete
+            floatingLabelText="Dress"
+            openOnFocus={true}
+            maxSearchResults={5}
+            dataSource={this.state.dataSource}
+            filter={AutoComplete.fuzzyFilter}
+            onNewRequest={this.handleChange.bind(this)}
+            />
+        ) : null}
+      </div>
+    )
   }
 }

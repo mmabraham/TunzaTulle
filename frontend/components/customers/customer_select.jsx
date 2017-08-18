@@ -23,8 +23,8 @@ export default class CustomerSelect extends React.Component {
     this.setState({dataSource: this.allCustomerItems})
   }
 
-  handleChange(customer, i) {
-    this.props.onSelect(null, i, customer && customer.id )
+  handleChange(item, i) {
+    this.props.onSelect(null, i, item && item.id )
   }
 
   render() {
