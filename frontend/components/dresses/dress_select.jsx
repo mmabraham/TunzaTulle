@@ -3,6 +3,9 @@ import AutoComplete from 'material-ui/AutoComplete';
 import DressThumbnail from './dress_thumbnail';
 import { List, ListItem } from 'material-ui/List';
 import MenuItem from 'material-ui/MenuItem';
+import AlertError from 'material-ui/svg-icons/alert/error';
+import ActionCheckCircle from 'material-ui/svg-icons/action/check-circle';
+
 
 export default class DressSelect extends React.Component {
   constructor(props) {
@@ -30,6 +33,10 @@ export default class DressSelect extends React.Component {
     this.setState({dataSource: this.allDressItems})
   }
 
+  isConflict(dress) {
+    this.props.orderDates
+  }
+
   handleChange(item, i) {
     const selectedDress = this.props.dresses[i]
     if (!this.state.selectedDresses.includes(selectedDress)) {
@@ -43,9 +50,18 @@ export default class DressSelect extends React.Component {
 
   render() {
     const selectedDressComponenets = this.state.selectedDresses.map(dress => {
+      const conflict = null; // TODO: complete this based on all order dates
       return (
-      <ListItem key={dress.id} >
+      <ListItem
+        key={dress.id}
+        style={conflict ? {border: '2px solid red'} : {} }
+      >
         <DressThumbnail dress={dress} />
+        {conflict ? (
+          <AlertError color="red"/>
+        ) : (
+          <ActionCheckCircle color="green"/>
+        )}
       </ListItem>
     )})
 
