@@ -61,7 +61,12 @@ export default class DressSelect extends React.Component {
       >
         <DressThumbnail dress={dress} />
         {conflict ? (
-          <AlertError color="red"/>
+          <div>
+            <span style={{color: 'red'}} >
+              This dress is not available for the selected dates.
+            </span>
+            <AlertError color="red"/>
+          </div>
         ) : (
           <ActionCheckCircle color="green"/>
         )}
