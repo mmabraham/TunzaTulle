@@ -29,6 +29,7 @@ const App = () => {
       <ProtectedRoute path='/orders/new' component={OrderForm} />
       <ProtectedRoute exact path='/orders' component={OrderList} />
       <ProtectedRoute exact path='/customers' component={CustomerList} />
+      <ProtectedRoute exact path='/' component={DressList} />
     </Switch>
   </header>
  </div>
