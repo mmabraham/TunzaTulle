@@ -33,8 +33,12 @@ export default class DressSelect extends React.Component {
     this.setState({dataSource: this.allDressItems})
   }
 
-  isConflict(dress) {
-    this.props.orderDates
+  isConflict(orderDates = []) {
+    const { startDate, endDate } = this.props.orderDates;
+    return orderDates.some(order => {
+      return startDate <= Date.parse(order.end_date) &&
+        endDate >= Date.parse(order.start_date);
+    });
   }
 
   handleChange(item, i) {
@@ -50,9 +54,8 @@ export default class DressSelect extends React.Component {
 
   render() {
     const selectedDressComponenets = this.state.selectedDresses.map(dress => {
-      const conflict = null; // TODO: complete this based on all order dates
-      return (
-      <ListItem
+      const conflict = this.isConflict(dress.order_dates);
+      return (<ListItem
         key={dress.id}
         style={conflict ? {border: '2px solid red'} : {} }
       >
@@ -62,8 +65,8 @@ export default class DressSelect extends React.Component {
         ) : (
           <ActionCheckCircle color="green"/>
         )}
-      </ListItem>
-    )})
+      </ListItem>)
+    })
 
     return (
       <div>
