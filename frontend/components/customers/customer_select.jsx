@@ -4,15 +4,19 @@ import AutoComplete from 'material-ui/AutoComplete';
 export default class CustomerSelect extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   componentDidMount() {
-    this.props.fetchCustomers()
-      .then(this.setCustomerItems.bind(this));
+    this.props.fetchCustomers();
   }
 
-  setCustomerItems() {
-    this.allCustomerItems = this.props.customers.map(customer => {
+  componentWillReceiveProps(newProps) {
+    this.setCustomerItems(newProps.customers || []);
+  }
+
+  setCustomerItems(customers) {
+    this.allCustomerItems = customers.map(customer => {
       return (
         {
           text: customer.name,
