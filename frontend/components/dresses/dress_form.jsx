@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import CurrencyInput from 'react-currency-input';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import Avatar from 'material-ui/Avatar';
 
 export default class DressForm extends React.Component {
   constructor(props) {
@@ -146,15 +147,16 @@ export default class DressForm extends React.Component {
 
           <TextField
             type="file"
-            fullWidth={true}
+            fullWidth={false}
             onChange={this.handleFileChange}
             errorText={ errors ? errors.description : '' }
             />
           {
-            this.state.image || this.state.img? (
-              <img src={this.state.image || this.state.img}/>
+            this.state.image || this.state.img ? (
+              <Avatar src={this.state.image || this.state.img}/>
             ) : null
           }
+          <br />
           <RaisedButton
             label="Save"
             primary={true}
