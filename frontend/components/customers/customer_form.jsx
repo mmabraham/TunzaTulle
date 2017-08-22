@@ -9,7 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 export default class CustomerForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { open: false };
+    this.state = { open: this.props.id };
 
     this.toggle = this.toggle.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +23,12 @@ export default class CustomerForm extends React.Component {
   }
 
   toggle() {
-    this.setState({ open: !this.state.open })
+    debugger
+    if (this.props.id) {
+      this.props.history.goBack();
+    } else {
+      this.setState({ open: !this.state.open })
+    }
   }
 
   handleChange(field) {
@@ -32,7 +37,7 @@ export default class CustomerForm extends React.Component {
 
   handleSubmit() {
     this.props.processForm(this.state)
-      .then(() => this.setState({open: false}));
+      .then(() => this.toggle())
   }
 
   render() {
