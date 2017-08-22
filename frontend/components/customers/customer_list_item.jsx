@@ -6,6 +6,7 @@ const CustomerListItem = props => {
       <MenuItem
         primaryText={`${props.customer.name}  -  ${props.customer.email}`}
         value={props.customer.id}
+        onTouchTap={props.onTouchTap}
       />
   )
 }
