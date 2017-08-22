@@ -37,7 +37,10 @@ export default class DressPage extends React.Component {
           {dress.description}
         </CardText>
         <CardActions>
-          <ConfirmDialog text="Delete This Dress" onConfirm={this.props.deleteDress}/>
+          <NavLink to={`/dresses/edit/${dress.id}`}>
+            <FlatButton label="Edit" />
+          </NavLink>
+          <ConfirmDialog text="Delete" onConfirm={this.props.deleteDress}/>
           <NavLink to="/orders/new">
             <FlatButton label="Create Order" />
           </NavLink>
