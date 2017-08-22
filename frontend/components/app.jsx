@@ -11,6 +11,7 @@ import DressForm from './dresses/dress_form_container';
 import OrderForm from './orders/order_form_container';
 import OrderList from './orders/order_list_container';
 import CustomerList from './customers/customer_list_container';
+import CustomerForm from './customers/customer_form_container';
 
 const App = () => {
   return (
@@ -22,13 +23,14 @@ const App = () => {
     <ProtectedRoute path='/' component={Drawer} />
     <Switch>
       <ProtectedRoute path='/users' component={UserList} />
-      <ProtectedRoute exact path='/dresses/new' component={DressForm} />
-      <ProtectedRoute exact path='/dresses/edit/:id' action='edit'component={DressForm} />
+      <ProtectedRoute path='/dresses/new' component={DressForm} />
+      <ProtectedRoute path='/dresses/edit/:id' action='edit'component={DressForm} />
       <ProtectedRoute path='/dresses/:id' component={DressPage} />
       <ProtectedRoute exact path='/dresses' component={DressList} />
       <ProtectedRoute path='/orders/new' component={OrderForm} />
       <ProtectedRoute exact path='/orders' component={OrderList} />
       <ProtectedRoute exact path='/customers' component={CustomerList} />
+      <ProtectedRoute path='/customers/edit/:id' component={CustomerForm} />
       <ProtectedRoute exact path='/' component={DressList} />
     </Switch>
   </header>

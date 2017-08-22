@@ -31,3 +31,8 @@ export const createCustomer = customer => dispatch => {
   return Util.createCustomer(customer)
     .then((customer) => dispatch(receiveCustomer(customer)))
 }
+
+export const updateCustomer = (dress, id) => dispatch => {
+  return Util.updateCustomer(dress, id)
+    .then(customer => dispatch(receiveCustomer(customer)))
+}

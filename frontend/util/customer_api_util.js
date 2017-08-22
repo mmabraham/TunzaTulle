@@ -21,3 +21,11 @@ export const createCustomer = customer => {
     error: res => console.log(res),
   })
 }
+
+export const updateCustomer = (customer, id) => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `/api/customers/${id}`,
+    data: { customer },
+  })
+}

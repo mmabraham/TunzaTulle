@@ -15,6 +15,13 @@ export default class CustomerForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.id) {
+      this.props.fetchCustomer()
+      .then(() => this.setState(this.props.customer))
+    }
+  }
+
   toggle() {
     this.setState({ open: !this.state.open })
   }
@@ -29,6 +36,7 @@ export default class CustomerForm extends React.Component {
   }
 
   render() {
+    debugger
     const errors = this.props.errors;
     const actions = [
       (<RaisedButton
