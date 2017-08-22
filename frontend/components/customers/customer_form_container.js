@@ -13,10 +13,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const id = ownProps.match.params.id;
-  debugger
   return ownProps.match.path.slice(11, 15) == 'edit' ? {
     id,
-    processForm: customer => dispatch(updateCustomer(customer)),
+    processForm: customer => dispatch(updateCustomer(customer, id)),
     fetchCustomer: () => dispatch(fetchCustomer(id)),
   } : {
     processForm: customer => dispatch(createCustomer(customer)),

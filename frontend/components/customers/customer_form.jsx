@@ -36,7 +36,6 @@ export default class CustomerForm extends React.Component {
   }
 
   render() {
-    debugger
     const errors = this.props.errors;
     const actions = [
       (<RaisedButton

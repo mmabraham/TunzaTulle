@@ -32,7 +32,7 @@ export const createCustomer = customer => dispatch => {
     .then((customer) => dispatch(receiveCustomer(customer)))
 }
 
-export const updateCustomer = (dress, id) => dispatch => {
-  return Util.updateCustomer(dress, id)
+export const updateCustomer = (customer, id) => dispatch => {
+  return Util.updateCustomer(customer, id)
     .then(customer => dispatch(receiveCustomer(customer)))
 }
