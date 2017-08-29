@@ -30,3 +30,11 @@ export const fetchOrder = id => dispatch => {
 export const createOrder = order => dispatch => {
   return Util.createOrder(order)
 }
+
+export const updateOrder = (order, id) => dispatch => {
+  return Util.updateOrder(order, id)
+}
+
+export const deleteOrder = id => dispatch => {
+  return Util.deleteOrder(id)
+}
