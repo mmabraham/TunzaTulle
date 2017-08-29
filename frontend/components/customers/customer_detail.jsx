@@ -7,7 +7,6 @@ const CustomerDetail = ({customer}) => {
 
   const style = {
     width: '400px',
-    // height: '350px',
     margin: '20px',
     padding: '20px',
     zIndex: 1,
@@ -15,6 +14,7 @@ const CustomerDetail = ({customer}) => {
     right: '0',
     textAlign: 'center',
   }
+  debugger
   return (
     <Paper style={style} zDepth={5} >
       <p>{customer.id}</p>
@@ -29,7 +29,7 @@ const CustomerDetail = ({customer}) => {
       <br />
       <p>{customer.notes}</p>
       <br />
-      <OrderList customerId={customer.id}/>
+      { customer.withoutOrders ? null : <OrderList customerId={customer.id}/>}
     </Paper>
   )
 }

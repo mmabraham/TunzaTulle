@@ -3,8 +3,8 @@ class Api::OrdersController < ApplicationController
   def index
     if params[:customer_id]
       @orders = Order
-        .where(customer_id: params[:customer_id])
         .includes(:customer, :dress_orders ,:dresses)
+        .where(customer_id: params[:customer_id])
         .order(:start_date)
     else
       @orders = Order
@@ -15,7 +15,7 @@ class Api::OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id]).includes(:dresses)
+    @order = Order.find(params[:id])
     if @order
       render :show
     else

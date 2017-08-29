@@ -12,6 +12,7 @@ import OrderForm from './orders/order_form_container';
 import OrderList from './orders/order_list_container';
 import CustomerList from './customers/customer_list_container';
 import CustomerForm from './customers/customer_form_container';
+import OrderPage from './orders/order_page_container';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
       <ProtectedRoute path='/dresses/:id' component={DressPage} />
       <ProtectedRoute exact path='/dresses' component={DressList} />
       <ProtectedRoute path='/orders/new' component={OrderForm} />
+      <ProtectedRoute exact path='/orders/:id' component={OrderPage} />
       <ProtectedRoute exact path='/orders' component={OrderList} />
       <ProtectedRoute exact path='/customers' component={CustomerList} />
       <ProtectedRoute path='/customers/edit/:id' component={CustomerForm} />
