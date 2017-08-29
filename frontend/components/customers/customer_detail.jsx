@@ -1,12 +1,13 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
+import OrderList from '../orders/order_list_container';
 
 const CustomerDetail = ({customer}) => {
   if (!customer) return null;
 
   const style = {
     width: '400px',
-    height: '350px',
+    // height: '350px',
     margin: '20px',
     padding: '20px',
     zIndex: 1,
@@ -28,6 +29,7 @@ const CustomerDetail = ({customer}) => {
       <br />
       <p>{customer.notes}</p>
       <br />
+      <OrderList customerId={customer.id}/>
     </Paper>
   )
 }

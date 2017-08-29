@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     // will fetch only customers' orders if rendered from customer detail
-    fetchOrders: () => dispatch(fetchOrders(ownProps.customer_id)),
+    fetchOrders: () => dispatch(fetchOrders({customer_id: ownProps.customerId})),
   }
 }
 

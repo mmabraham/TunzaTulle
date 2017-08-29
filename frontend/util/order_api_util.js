@@ -2,7 +2,7 @@ export const fetchOrders = filters => {
   return $.ajax({
     method: 'GET',
     url: '/api/orders',
-    // data: { filters }
+    data: filters
   })
 }
 
