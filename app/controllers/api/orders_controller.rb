@@ -1,7 +1,16 @@
 class Api::OrdersController < ApplicationController
   before_action :require_admin!
   def index
-    @orders = Order.includes(:customer, :dress_orders ,:dresses).order(:start_date)
+    if params[:customer_id]
+      @orders = Order
+        .where(customer_id: params[:customer_id])
+        .includes(:customer, :dress_orders ,:dresses)
+        .order(:start_date)
+    else
+      @orders = Order
+        .includes(:customer, :dress_orders ,:dresses)
+        .order(:start_date)
+    end
     render :index
   end
 
