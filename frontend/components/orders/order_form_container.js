@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { createOrder } from '../../actions/order_actions';
+import { withRouter } from 'react-router-dom';
+import { createOrder, updateOrder, fetchOrder } from '../../actions/order_actions';
 import { receiveErrors } from '../../actions/session_actions';
 import OrderForm from './order_form';
 
@@ -9,11 +10,18 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const edit = ownProps.match.path.slice(8, 12) === 'edit'
+  const submit = edit ? updateOrder : createOrder;
+  const id = edit ? ownProps.match.params.id : null;
   return {
-    createOrder: (order) => dispatch(createOrder(order)),
+    submit: (order) => dispatch(submit(order, id)),
     receiveErrors: (errors) => dispatch(receiveErrors(errors)),
+    fetchOrder: () => dispatch(fetchOrder(id)),
+    id,
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderForm)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(OrderForm)
+)

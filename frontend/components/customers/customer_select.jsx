@@ -11,8 +11,8 @@ export default class CustomerSelect extends React.Component {
     this.props.fetchCustomers();
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setCustomerItems(newProps.customers || []);
+  componentWillReceiveProps(nextProps) {
+    this.setCustomerItems(nextProps.customers || []);
   }
 
   setCustomerItems(customers) {
@@ -28,13 +28,15 @@ export default class CustomerSelect extends React.Component {
   }
 
   handleChange(item, i) {
-    this.props.onSelect(null, i, item && item.id )
+    this.props.onSelect(null, i, item && item.value )
   }
 
   render() {
+    debugger
+    const initialCustomer = this.props.customers.find(customer => customer.id === this.props.initialCustomerId);
     return this.allCustomerItems ? (
       <AutoComplete
-        floatingLabelText="Customer"
+        hintText={(initialCustomer && initialCustomer.name) || 'Customer'}
         openOnFocus={true}
         maxSearchResults={5}
         dataSource={this.state.dataSource}

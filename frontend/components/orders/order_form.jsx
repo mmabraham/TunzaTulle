@@ -25,8 +25,25 @@ export default class OrderForm extends React.Component {
     this.handleEventChange = this.handleEventChange.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.id) {
+      this.props.fetchOrder().then(action => {
+        const {start_date, end_date, event_date, status, customer, dresses} = action.order[this.props.id];
+        const savedOrder = {
+          start_date: new Date(start_date),
+          end_date: new Date(end_date),
+          event_date: new Date(event_date),
+          status,
+          customer_id: customer.id,
+          dress_ids: dresses.map(dress => dress.id),
+        }
+        this.setState(savedOrder)
+      })
+    }
+  }
+
   handleSubmit() {
-    this.props.createOrder(this.state)
+    this.props.submit(this.state)
       .fail(res => this.props.receiveErrors(res.responseJSON));
   }
 
@@ -45,6 +62,7 @@ export default class OrderForm extends React.Component {
   }
 
   render() {
+    debugger
     const errors = this.props.errors;
     return (
       <form>
@@ -56,7 +74,7 @@ export default class OrderForm extends React.Component {
           }}
           />
         <br />
-        <CustomerSelect onSelect={this.handleChange('customer_id')} />
+        <CustomerSelect onSelect={this.handleChange('customer_id')} initialCustomerId={this.state.customer_id}/>
         <CustomerForm />
         <br />
         <DatePicker
