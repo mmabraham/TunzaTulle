@@ -14,6 +14,15 @@ class Api::OrdersController < ApplicationController
     render :index
   end
 
+  def show
+    @order = Order.find(params[:id]).includes(:dresses)
+    if @order
+      render :show
+    else
+      render json: {}, status: 404
+    end
+  end
+
   def create
     @order = Order.new(order_params)
     if @order.save
