@@ -5,6 +5,7 @@ import { List, ListItem } from 'material-ui/List';
 import MenuItem from 'material-ui/MenuItem';
 import AlertError from 'material-ui/svg-icons/alert/error';
 import ActionCheckCircle from 'material-ui/svg-icons/action/check-circle';
+import Chip from 'material-ui/Chip';
 
 
 export default class DressSelect extends React.Component {
@@ -52,12 +53,18 @@ export default class DressSelect extends React.Component {
     }
   }
 
+  removeDress(dressToRemove) {
+    this.setState({
+      selectedDresses: this.state.selectedDresses.filter(dress => dress != dressToRemove)
+    })
+  }
+
   render() {
     if (this.props.dresses.length == 0) return null;
-    debugger
     const selectedDressComponents = this.state.selectedDresses.map(dress => {
       const conflict = this.isConflict(dress.order_dates);
-      return (<ListItem
+      return (<Chip
+        onRequestDelete={() => this.removeDress(dress)}
         key={dress.id}
         style={conflict ? {border: '2px solid red'} : {} }
       >
@@ -72,7 +79,7 @@ export default class DressSelect extends React.Component {
         ) : (
           <ActionCheckCircle color="green"/>
         )}
-      </ListItem>)
+      </Chip>)
     })
 
     return (

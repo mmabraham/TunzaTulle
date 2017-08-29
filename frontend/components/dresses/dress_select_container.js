@@ -5,7 +5,6 @@ import DressSelect from './dress_select';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
-  debugger
   const id = ownProps.match.params.id;
   const preselectedDresses = state.dresses[id] ? [state.dresses[id]] : []
   return {
