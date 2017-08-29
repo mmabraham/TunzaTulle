@@ -28,7 +28,7 @@ const App = () => {
       <ProtectedRoute path='/dresses/edit/:id' action='edit'component={DressForm} />
       <ProtectedRoute path='/dresses/:id' component={DressPage} />
       <ProtectedRoute exact path='/dresses' component={DressList} />
-      <ProtectedRoute path='/orders/new' component={OrderForm} />
+      <ProtectedRoute path='/orders/new/:id' component={OrderForm} />
       <ProtectedRoute exact path='/orders/:id' component={OrderPage} />
       <ProtectedRoute exact path='/orders' component={OrderList} />
       <ProtectedRoute exact path='/customers' component={CustomerList} />

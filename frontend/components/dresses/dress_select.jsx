@@ -30,7 +30,7 @@ export default class DressSelect extends React.Component {
         }
       )
     })
-    this.setState({dataSource: this.allDressItems})
+    this.setState({dataSource: this.allDressItems, selectedDresses: this.props.selectedDresses})
   }
 
   isConflict(orderDates = []) {
@@ -53,7 +53,9 @@ export default class DressSelect extends React.Component {
   }
 
   render() {
-    const selectedDressComponenets = this.state.selectedDresses.map(dress => {
+    if (this.props.dresses.length == 0) return null;
+    debugger
+    const selectedDressComponents = this.state.selectedDresses.map(dress => {
       const conflict = this.isConflict(dress.order_dates);
       return (<ListItem
         key={dress.id}
@@ -76,7 +78,7 @@ export default class DressSelect extends React.Component {
     return (
       <div>
         <List>
-          {selectedDressComponenets}
+          {selectedDressComponents}
         </List>
         {this.allDressItems ? (
           <AutoComplete
