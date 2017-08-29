@@ -1,6 +1,8 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import OrderList from '../orders/order_list_container';
+import { NavLink } from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton';
 
 const CustomerDetail = ({customer}) => {
   if (!customer) return null;
@@ -28,6 +30,9 @@ const CustomerDetail = ({customer}) => {
       <br />
       <p>{customer.notes}</p>
       <br />
+      <NavLink to={`/customers/edit/${customer.id}`} >
+        <FlatButton>Edit</FlatButton>
+      </NavLink>
       { customer.withoutOrders ? null : <OrderList customerId={customer.id}/>}
     </Paper>
   )

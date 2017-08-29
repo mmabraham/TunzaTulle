@@ -22,23 +22,24 @@ export default class OrderPage extends React.Component {
     order.customer.withoutOrders = true;
     const dresses = order.dresses;
     const totalPrice = order.dresses.reduce((sum, dress) => sum + parseInt(dress.price, 10), 0)
+    debugger
     return (
-      <Card>
+      <Card style={{width: '80%', padding: 30}}>
         <CardHeader
           title={order.id}
           subtitle={order.status}
         />
         <CardTitle
-          title={`${order.start_date} - ${order.end_date}`}
+          title={`${new Date(order.start_date).toDateString()} - ${new Date(order.end_date).toDateString()}`}
           subtitle={`Total Price: $ ${parseInt(totalPrice / 100, 10)}.${parseInt(totalPrice % 100, 10)}`}
         />
-        <CardTitle title={order.status} subtitle={moment.default(order.start_date).fromNow()} />
+      <CardTitle title={order.status} subtitle={moment.default(order.event_date).fromNow()} />
         <CustomerDetail customer={order.customer}/>
         <CardActions>
           <ConfirmDialog text="Delete" onConfirm={this.props.deleteOrder}/>
         </CardActions>
         <h1>Dresses</h1>
-        {dresses.map(dress => (<DressListItem dress={dress} key={dress.id}/>))}
+        {dresses.map(dress => (<DressListItem dress={dress} key={dress.id} />))}
       </Card>
     )
   }

@@ -21,7 +21,7 @@ export default class OrderList extends React.Component {
   }
 
   render() {
-    if (!this.props.orders.length) return (<LinearProgress />);
+    if (!this.props.orders || !this.props.orders.length) return (<LinearProgress />);
     const orders = this.props.orders.map(order => (
       <OrderListItem
         order={order}
