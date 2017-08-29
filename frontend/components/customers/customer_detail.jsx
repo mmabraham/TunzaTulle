@@ -14,7 +14,6 @@ const CustomerDetail = ({customer}) => {
     right: '0',
     textAlign: 'center',
   }
-  debugger
   return (
     <Paper style={style} zDepth={5} >
       <p>{customer.id}</p>
