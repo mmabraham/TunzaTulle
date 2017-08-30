@@ -44,6 +44,7 @@ export default class OrderForm extends React.Component {
 
   handleSubmit() {
     this.props.submit(this.state)
+      .then((id) => this.props.history.push(`/orders/${id}`))
       .fail(res => this.props.receiveErrors(res.responseJSON));
   }
 
