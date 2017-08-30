@@ -23,7 +23,6 @@ export default class CustomerForm extends React.Component {
   }
 
   toggle() {
-    debugger
     if (this.props.id) {
       this.props.history.goBack();
     } else {

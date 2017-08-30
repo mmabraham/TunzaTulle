@@ -22,7 +22,6 @@ export default class OrderPage extends React.Component {
     order.customer.withoutOrders = true;
     const dresses = order.dresses;
     const totalPrice = order.dresses.reduce((sum, dress) => sum + parseInt(dress.price, 10), 0)
-    debugger
     return (
       <Card style={{width: '80%', padding: 30}}>
         <CardHeader

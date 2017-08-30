@@ -62,13 +62,12 @@ export default class OrderForm extends React.Component {
   }
 
   render() {
-    debugger
     const errors = this.props.errors;
     return (
       <form>
         <DressSelect
           onSelect={this.handleChange('dress_ids')}
-          ids={this.props.dress_ids}
+          ids={this.state.dress_ids}
           edit={this.props.edit}
           orderDates={{
             startDate: this.state.start_date,

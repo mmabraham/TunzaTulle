@@ -13,13 +13,18 @@ export default class DressSelect extends React.Component {
     super(props);
     this.state = {
       searchText: '',
-      selectedDresses: this.props.selectedDresses,
     };
   }
 
   componentDidMount() {
     this.props.fetchDresses()
       .then(this.setDressItems.bind(this));
+  }
+
+  componentWillReceiveProps({selectedDresses}) {
+    if (!this.state.selectedDresses && selectedDresses[0]) {
+      this.setState({selectedDresses})
+    }
   }
 
   setDressItems() {
@@ -31,22 +36,23 @@ export default class DressSelect extends React.Component {
         }
       )
     })
-    this.setState({dataSource: this.allDressItems, selectedDresses: this.props.selectedDresses})
+    this.setState({dataSource: this.allDressItems})
   }
 
-  isConflict(orderDates = []) {
+  isConflict(dressOption) {
     const { startDate, endDate } = this.props.orderDates;
-    return orderDates.some(order => {
-      return startDate <= Date.parse(order.end_date) &&
-        endDate >= Date.parse(order.start_date);
-    });
+    return !this.props.selectedDresses.some(dress => dress.id != dressOption.id) &&
+      dressOption.orderDates.some(order => {
+        return startDate <= Date.parse(order.end_date) &&
+          endDate >= Date.parse(order.start_date);
+      });
   }
 
   handleChange(item, i) {
     const selectedDress = this.props.dresses[i]
     if (!this.state.selectedDresses.includes(selectedDress)) {
       this.setState({
-        selectedDresses: this.state.selectedDresses.concat([selectedDress]),
+        selectedDresses: this.state.selectedDresses.concat(this.props.selectedDresses).concat([selectedDress]),
         searchText: '',
       })
       this.props.onSelect(null, i, this.state.selectedDresses.map(dress => dress.id));
@@ -60,14 +66,19 @@ export default class DressSelect extends React.Component {
   }
 
   render() {
-    if (this.props.dresses.length == 0) return null;
-    const selectedDressComponents = this.state.selectedDresses.map(dress => {
-      const conflict = this.isConflict(dress.order_dates);
+    if (this.props.dresses.length == 0) {
+      return null;
+    }
+    console.log(this.state.selectedDresses, '  <--- selectedDresses (line: 73)');
+
+    const selectedDressComponents = this.state.selectedDresses && this.state.selectedDresses.map((dress) => {
+      console.log(dress, '  <--- dress (line: 77)');
+      const conflict = this.isConflict(dress);
       return (<Chip
         onRequestDelete={() => this.removeDress(dress)}
         key={dress.id}
         style={conflict ? {border: '2px solid red'} : {} }
-      >
+        >
         <DressThumbnail dress={dress} />
         {conflict ? (
           <div>

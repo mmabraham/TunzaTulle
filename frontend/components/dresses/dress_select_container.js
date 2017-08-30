@@ -5,12 +5,16 @@ import DressSelect from './dress_select';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
-  const ids = ownProps.edit ? (ownProps.ids || []) : [ownProps.match.params.id];
-  //const preselectedDresses = state.dresses[ids[0]] ? ids.map(id => state.dresses[id]) : []
-  debugger
+  let ids;
+  if (ownProps.edit) {
+    ids = ownProps.ids || []
+  } else {
+    ids = ownProps.match.params.id ? [ownProps.match.params.id] : []
+  }
+
   return {
     dresses: asArray(state.dresses),
-    selectedDresses: byIds(state.dresses, ids),//.concat(ids || [])),//.concat(preselectedDresses),
+    selectedDresses: byIds(state.dresses, ids),
   }
 }
 
