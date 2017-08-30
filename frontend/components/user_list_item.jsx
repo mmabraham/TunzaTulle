@@ -1,6 +1,7 @@
 import React from 'react';
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
+import ConfirmDialog from './confirm_dialog';
 
 const UserListItem = props => {
   const user = props.user;
@@ -23,11 +24,7 @@ const UserListItem = props => {
         />
       </TableRowColumn>
       <TableRowColumn>
-        <RaisedButton
-          secondary={true}
-          label="Delete"
-          onTouchTap={props.deleteUser}
-        />
+        <ConfirmDialog text="Delete" onConfirm={props.deleteUser}/>
       </TableRowColumn>
     </TableRow>
   )
