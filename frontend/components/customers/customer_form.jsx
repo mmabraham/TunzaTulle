@@ -58,7 +58,7 @@ export default class CustomerForm extends React.Component {
       <div>
         { this.state.open ? (
           <Dialog zDepth={5}
-            title="Add a new customer"
+            title={this.props.id ? 'Edit customer info' : 'Add a new customer'}
             actions={actions}
             modal={false}
             open={this.state.open}
