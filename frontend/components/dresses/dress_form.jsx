@@ -58,7 +58,6 @@ export default class DressForm extends React.Component {
 
   render() {
     const errors = this.props.errors;
-    console.log(this.state)
     return (
       <Paper zDepth={2} className="dress-form">
         <form>
