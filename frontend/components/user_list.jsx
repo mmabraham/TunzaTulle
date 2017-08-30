@@ -13,7 +13,12 @@ export default class UserList extends React.Component {
 
   render() {
     const users = this.props.users.map(user => (
-      <UserListItem user={user} key={user.id} authorize={this.props.authorize}/>
+      <UserListItem
+        currentUser={this.props.currentUser}
+        user={user}
+        key={user.id}
+        authorize={this.props.authorize}
+      />
     ))
     return (
       <Table>

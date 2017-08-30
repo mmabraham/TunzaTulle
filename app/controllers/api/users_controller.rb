@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  before_action :require_admin!, only: [:update, :index]
+  before_action :require_admin!, only: [:update, :index, :destroy]
   def index
     @users = User.all
     render :index
@@ -24,6 +24,15 @@ class Api::UsersController < ApplicationController
       render :index
     else
       render json: user.errors, status: 422
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      render :index
+    else
+      render json: {}, status: 422
     end
   end
 
