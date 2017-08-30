@@ -34,7 +34,9 @@ class Api::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    if @order.update(order_params)
+    updated_params = order_params
+    updated_params[:dress_ids] ||= []
+    if @order.update(updated_params)
       render json: @order.id
     else
       render json: @order.errors, status: 422
