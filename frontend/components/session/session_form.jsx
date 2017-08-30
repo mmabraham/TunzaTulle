@@ -44,7 +44,7 @@ class SessionForm extends React.Component {
 
     return (
 			<main>
-				<AppBar title="App" />
+				<AppBar title="TunzaTulle" />
 				<Paper style={style} zDepth={5} >
 					<form>
 						<TextField

@@ -6,7 +6,7 @@ import Menu from './menu'
 const Navbar = (props) => {
   return (
     <AppBar
-      title="App"
+      title="TunzaTulle"
       onLeftIconButtonTouchTap={props.toggleDrawer}
       iconElementRight={<Menu {...props}/>}
       />
