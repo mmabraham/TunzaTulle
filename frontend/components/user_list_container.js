@@ -6,6 +6,7 @@ import { fetchUsers, authorizeUser } from '../actions/user_actions';
 const mapStateToProps = state => {
   return {
     users: asArray(state.users),
+    currentUser: state.session.user,
   }
 }
 
