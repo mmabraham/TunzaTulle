@@ -13,6 +13,7 @@ export default class DressSelect extends React.Component {
     super(props);
     this.state = {
       searchText: '',
+      selectedDresses: [],
     };
   }
 
@@ -22,8 +23,9 @@ export default class DressSelect extends React.Component {
   }
 
   componentWillReceiveProps({selectedDresses}) {
-    if (!this.state.selectedDresses && selectedDresses[0]) {
-      this.setState({selectedDresses})
+    if (!this.state.addedPreselectedDresses &&
+          !this.state.selectedDresses[0] && selectedDresses[0]) {
+      this.setState({selectedDresses, addedPreselectedDresses: true})
     }
   }
 
@@ -41,8 +43,8 @@ export default class DressSelect extends React.Component {
 
   isConflict(dressOption) {
     const { startDate, endDate } = this.props.orderDates;
-    return !this.props.selectedDresses.some(dress => dress.id != dressOption.id) &&
-      dressOption.orderDates.some(order => {
+    return !this.props.selectedDresses.some(dress => dress.id === dressOption.id) &&
+      dressOption.order_dates.some(order => {
         return startDate <= Date.parse(order.end_date) &&
           endDate >= Date.parse(order.start_date);
       });
@@ -52,7 +54,7 @@ export default class DressSelect extends React.Component {
     const selectedDress = this.props.dresses[i]
     if (!this.state.selectedDresses.includes(selectedDress)) {
       this.setState({
-        selectedDresses: this.state.selectedDresses.concat(this.props.selectedDresses).concat([selectedDress]),
+        selectedDresses: this.state.selectedDresses.concat([selectedDress]),
         searchText: '',
       })
       this.props.onSelect(null, i, this.state.selectedDresses.map(dress => dress.id));
@@ -60,37 +62,39 @@ export default class DressSelect extends React.Component {
   }
 
   removeDress(dressToRemove) {
+    const selectedDresses = this.state.selectedDresses.filter(dress => dress != dressToRemove)
     this.setState({
-      selectedDresses: this.state.selectedDresses.filter(dress => dress != dressToRemove)
+      selectedDresses,
     })
+    this.props.onSelect(null, null, selectedDresses.map(dress => dress.id))
   }
 
   render() {
     if (this.props.dresses.length == 0) {
       return null;
     }
-    console.log(this.state.selectedDresses, '  <--- selectedDresses (line: 73)');
 
-    const selectedDressComponents = this.state.selectedDresses && this.state.selectedDresses.map((dress) => {
-      console.log(dress, '  <--- dress (line: 77)');
+    const selectedDressComponents = this.state.selectedDresses.map((dress) => {
       const conflict = this.isConflict(dress);
-      return (<Chip
-        onRequestDelete={() => this.removeDress(dress)}
-        key={dress.id}
-        style={conflict ? {border: '2px solid red'} : {} }
-        >
-        <DressThumbnail dress={dress} />
-        {conflict ? (
-          <div>
-            <span style={{color: 'red'}} >
-              This dress is not available for the selected dates.
-            </span>
-            <AlertError color="red"/>
-          </div>
-        ) : (
-          <ActionCheckCircle color="green"/>
-        )}
-      </Chip>)
+      return (
+        <Chip
+          onRequestDelete={() => this.removeDress(dress)}
+          key={dress.id}
+          style={conflict ? {border: '2px solid red'} : {} }
+          >
+          <DressThumbnail dress={dress} />
+          {conflict ? (
+            <div>
+              <span style={{color: 'red'}} >
+                This dress is not available for the selected dates.
+              </span>
+              <AlertError color="red"/>
+            </div>
+          ) : (
+            <ActionCheckCircle color="green"/>
+          )}
+        </Chip>
+      )
     })
 
     return (

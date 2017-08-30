@@ -50,6 +50,7 @@ export default class OrderForm extends React.Component {
   handleChange(field) {
     return (e, i, val) => {
       this.setState({[field]: (e && e.target.value) || val || i })
+      console.log(this.state.dress_ids, ' <---- dress_ids')
     }
   }
 
