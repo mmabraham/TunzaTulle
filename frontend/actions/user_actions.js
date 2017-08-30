@@ -16,3 +16,7 @@ export const authorizeUser = (id, admin) => dispatch => {
   return ApiUtil.authorizeUser(id, admin)
     .then(users => dispatch(receiveUsers(users)))
 }
+
+export const deleteUser = id => dispatch => {
+  return ApiUtil.deleteUser(id).then(users => dispatch(receiveUsers(users)));
+}

@@ -18,6 +18,7 @@ export default class UserList extends React.Component {
         user={user}
         key={user.id}
         authorize={this.props.authorize}
+        deleteUser={() => this.props.deleteUser(user.id)}
       />
     ))
     return (

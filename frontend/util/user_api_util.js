@@ -12,3 +12,10 @@ export const authorizeUser = (id, admin) => {
     data: { admin },
   })
 }
+
+export const deleteUser = id => {
+  return $.ajax({
+    method: 'DELETE',
+    url: `/api/users/${id}`,
+  })
+}

@@ -30,6 +30,7 @@ class Api::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
+      @users = User.all
       render :index
     else
       render json: {}, status: 422

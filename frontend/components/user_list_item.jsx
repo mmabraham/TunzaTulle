@@ -22,6 +22,13 @@ const UserListItem = props => {
           onTouchTap={id => props.authorize(user.id, false)}
         />
       </TableRowColumn>
+      <TableRowColumn>
+        <RaisedButton
+          secondary={true}
+          label="Delete"
+          onTouchTap={props.deleteUser}
+        />
+      </TableRowColumn>
     </TableRow>
   )
 }
