@@ -1,6 +1,7 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
+import Navbar from '../navbar_container';
 
 const AwaitAuth = () => {
   const style = {
@@ -19,7 +20,7 @@ const AwaitAuth = () => {
 
   return (
     <main>
-      <AppBar title="App" />
+      <Navbar />
       <Paper style={style} zDepth={5} >
         <h1>Thank you for registering.</h1>
         <br />

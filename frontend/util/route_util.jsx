@@ -5,12 +5,12 @@ import AwaitAuth from '../components/session/await_auth';
 
 const Auth = ({component: Component, path, loggedIn, user}) => {
   return (<Route path={path} render={(props) => {
-    if (!loggedIn && !user.admin) {
-      return ( <Component {...props}/> )
-    } else if (loggedIn && user.admin) {
+    if (loggedIn && user.admin) {
       return ( <Redirect to="/"/> )
-    } else {
+    } else if (loggedIn && !user.admin) {
       return ( <AwaitAuth /> )
+    } else {
+      return ( <Component {...props}/> )
     }
   }}/>)
 };
