@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     submit: (order) => dispatch(submit(order, id)),
     receiveErrors: (errors) => dispatch(receiveErrors(errors)),
     fetchOrder: () => dispatch(fetchOrder(id)),
+    edit,
     id,
   }
 }

@@ -36,7 +36,10 @@ export default class OrderPage extends React.Component {
       <CardTitle title={order.status} subtitle={moment.default(order.event_date).fromNow()} />
         <CustomerDetail customer={order.customer}/>
         <CardActions>
-          <ConfirmDialog text="Delete" onConfirm={this.props.deleteOrder}/>
+          <NavLink to={`/orders/edit/${order.id}`} >
+            <FlatButton label="Edit this order" />
+          </NavLink>
+          <ConfirmDialog text="Delete this order" onConfirm={this.props.deleteOrder}/>
         </CardActions>
         <h1>Dresses</h1>
         {dresses.map(dress => (<DressListItem dress={dress} key={dress.id} />))}

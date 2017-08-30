@@ -68,6 +68,8 @@ export default class OrderForm extends React.Component {
       <form>
         <DressSelect
           onSelect={this.handleChange('dress_ids')}
+          ids={this.props.dress_ids}
+          edit={this.props.edit}
           orderDates={{
             startDate: this.state.start_date,
             endDate: this.state.end_date,

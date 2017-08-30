@@ -32,7 +32,6 @@ export default class CustomerSelect extends React.Component {
   }
 
   render() {
-    debugger
     const initialCustomer = this.props.customers.find(customer => customer.id === this.props.initialCustomerId);
     return this.allCustomerItems ? (
       <AutoComplete
