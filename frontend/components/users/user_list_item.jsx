@@ -1,7 +1,7 @@
 import React from 'react';
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
-import ConfirmDialog from './confirm_dialog';
+import ConfirmDialog from '../confirm_dialog';
 
 const UserListItem = props => {
   const user = props.user;
