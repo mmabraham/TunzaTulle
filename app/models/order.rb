@@ -15,7 +15,7 @@
 class Order < ActiveRecord::Base
   before_save :ensure_customer!
   validates :event_date, :start_date, :end_date, presence: true
-  validate :starts_before_event, :ends_after_event
+  validate :starts_before_event, :ends_after_event, :has_no_conflicting_orders
   validates :status, inclusion: ['pending', 'approved', 'shipped', 'returned', 'canceled']
 
   def self.active
@@ -46,9 +46,15 @@ class Order < ActiveRecord::Base
     errors.add(:end_date, 'cannot be before event date') if end_date && end_date < event_date
   end
 
+  def has_no_conflicting_orders
+    errors.add(:dresses, 'cannot double order any dresses') unless conflicting_orders.empty?
+  end
+
   def dress_ids=(dress_ids)
     self.dresses = Dress.find(dress_ids)
   end
+
+  private
 
   def overlapping_orders
     Order
@@ -56,4 +62,9 @@ class Order < ActiveRecord::Base
     .where.not(id: id)
   end
 
+  def conflicting_orders
+    overlapping_orders
+    .joins(:dress_orders)
+    .where('dress_orders.dress_id' => self.dresses)
+  end
 end
