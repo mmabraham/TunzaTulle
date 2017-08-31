@@ -18,13 +18,17 @@ class Order < ActiveRecord::Base
   validate :starts_before_event, :ends_after_event
   validates :status, inclusion: ['pending', 'approved', 'shipped', 'returned', 'canceled']
 
-  scope :active, -> { where('? BETWEEN start_date AND end_date', Time.now) }
-  scope :past, -> { where('end_date < ?', Time.now) }
-  scope :future, -> { where('start_date > ?', Time.now) }
-  scope :conflicting, ->(start_date, end_date) {
-    where('start_date <= ? AND end_date >= ?', end_date, start_date)
-  }
+  def self.active
+    where('? BETWEEN start_date AND end_date', Time.now)
+  end
 
+  def self.past
+    where('end_date < ?', Time.now)
+  end
+
+  def self.future
+    where('start_date > ?', Time.now)
+  end
 
   belongs_to :customer
   has_many :dress_orders
@@ -45,4 +49,11 @@ class Order < ActiveRecord::Base
   def dress_ids=(dress_ids)
     self.dresses = Dress.find(dress_ids)
   end
+
+  def overlapping_orders
+    Order
+    .where('start_date <= ? AND end_date >= ?', end_date, start_date)
+    .where.not(id: id)
+  end
+
 end
