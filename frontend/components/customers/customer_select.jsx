@@ -1,5 +1,6 @@
 import React from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
+import CircularProgress from 'material-ui/CircularProgress';
 
 export default class CustomerSelect extends React.Component {
   constructor(props) {
@@ -42,6 +43,6 @@ export default class CustomerSelect extends React.Component {
         filter={AutoComplete.fuzzyFilter}
         onNewRequest={this.handleChange.bind(this)}
       />
-    ) : null;
+  ) : ( <CircularProgress /> );
   }
 }

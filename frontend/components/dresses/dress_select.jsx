@@ -6,6 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import AlertError from 'material-ui/svg-icons/alert/error';
 import ActionCheckCircle from 'material-ui/svg-icons/action/check-circle';
 import Chip from 'material-ui/Chip';
+import CircularProgress from 'material-ui/CircularProgress';
 
 
 export default class DressSelect extends React.Component {
@@ -71,7 +72,7 @@ export default class DressSelect extends React.Component {
 
   render() {
     if (this.props.dresses.length == 0) {
-      return null;
+      return ( <CircularProgress /> );
     }
 
     const selectedDressComponents = this.state.selectedDresses.map((dress) => {
