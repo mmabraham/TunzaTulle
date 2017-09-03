@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "mazal-tov@TunzaTulle.herokuapp.com"
+  default from: "menachemaweb@gmail.com"
   layout 'mailer'
 end
