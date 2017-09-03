@@ -28,10 +28,13 @@ class Api::CustomersController < ApplicationController
   end
 
   def send_all_reminders
-    msg = CustomerMailer.remind_to_return
-    msg.deliver_now
+    @orders = Order.includes(:customer, :dresses).event_was_yesterday
+    @orders.each do |order|
+      msg = CustomerMailer.remind_to_return(order)
+      msg.deliver_now
+    end
 
-    render json: "Sent #{@customer.count} reminders"
+    render json: "Sent #{@orders.count} reminders"
   end
 
   def customer_params

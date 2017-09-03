@@ -22,6 +22,10 @@ class Order < ActiveRecord::Base
     where('? BETWEEN start_date AND end_date', Time.now)
   end
 
+  def self.event_was_yesterday
+    where("DATE(event_date) = ?", Date.today-1)
+  end
+
   def self.past
     where('end_date < ?', Time.now)
   end

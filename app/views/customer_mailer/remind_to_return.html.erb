@@ -4,16 +4,16 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>hello <%= @customer.name %>,</p>
-    <br />
-    <p>Mazal Tov on your event!</p>
-    <br />
+    <p>Hello <%= @customer.name %>,</p>
+    <p>Mazal Tov on your simcha!</p>
     <br />
     <p>We just wanted to remind you that the following dresses need to be returned by one week from today.</p>
     <br />
-    <br />
+    <% @order.dresses.each do |dress| %>
+      <h4 ><%= dress.title %></h4>
+      <img src="<%= dress.image.url %>" />
+    <% end %>
     <p>Thank you,</p>
-    <br />
     <p>TunzaTulle</p>
   </body>
 </html>
