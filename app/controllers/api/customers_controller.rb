@@ -27,6 +27,13 @@ class Api::CustomersController < ApplicationController
     render :show
   end
 
+  def send_all_reminders
+    msg = CustomerMailer.remind_to_return
+    msg.deliver_now
+
+    render json: "Sent #{@customer.count} reminders"
+  end
+
   def customer_params
     params.require(:customer).permit(:name, :email, :phone_number, :address, :notes)
   end

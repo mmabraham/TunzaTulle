@@ -8,4 +8,7 @@ Rails.application.routes.draw do
     resources :customers, except: [:new, :edit]
     resources :orders, except: [:new, :edit]
   end
+
+
+  get '/customers/send_all_reminders', to: 'api/customers#send_all_reminders'
 end
