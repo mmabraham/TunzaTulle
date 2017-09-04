@@ -32,6 +32,7 @@ class Api::CustomersController < ApplicationController
     @orders.each do |order|
       msg = CustomerMailer.remind_to_return(order)
       msg.deliver_now
+      order.reminder_sent = true
     end
 
     render json: "Sent #{@orders.count} reminders"
