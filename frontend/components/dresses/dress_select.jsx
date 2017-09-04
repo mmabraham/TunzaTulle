@@ -32,26 +32,28 @@ export default class DressSelect extends React.Component {
 
   setDressItems() {
     this.allDressItems = this.props.dresses.map(dress => {
-      const conflict = this.isConflict(dress);
+      const available = this.isAvailable(dress);
       return ({
           text: `${dress.barcode}  -  ${dress.title}`,
           value: (<MenuItem>
                     <Chip
                       onRequestDelete={() => this.removeDress(dress)}
                       key={dress.id}
-                      style={conflict ? {border: '2px solid red'} : {} }
+                      style={available ? {} : {border: '2px solid red'} }
                     >
                       <DressThumbnail dress={dress} />
-                      {conflict ? (
-                        <div>
-                          <span style={{color: 'red'}} >
-                            This dress is not available for the selected dates.
-                          </span>
-                          <AlertError color="red"/>
-                        </div>
-                      ) : (
-                        <ActionCheckCircle color="green"/>
-                      )}
+                      {
+                        available ? (
+                          <ActionCheckCircle color="green"/>
+                        ) : (
+                          <div>
+                            <span style={{color: 'red'}} >
+                              This dress is not available for the selected dates.
+                            </span>
+                            <AlertError color="red"/>
+                          </div>
+                        )
+                      }
                     </Chip>
                   </MenuItem>),
         })
@@ -59,14 +61,22 @@ export default class DressSelect extends React.Component {
     this.setState({dataSource: this.allDressItems})
   }
 
-  isConflict(dressOption) {
-    console.log(dressOption)
+  isAvailable(dressOption) {
+    // console.log(dressOption)
+    // console.log(this.props.order_id)
+    console.log(this.props.orderDates)
+    const order_id = this.props.order_id;
     const { startDate, endDate } = this.props.orderDates;
-    return !this.props.selectedDresses.some(dress => dress.id === dressOption.id) &&
-      dressOption.order_dates.some(order => {
-        return startDate <= Date.parse(order.end_date) &&
-          endDate >= Date.parse(order.start_date);
+    const noConflict = dressOption.order_dates.every(order => {
+        const a = startDate > Date.parse(order.end_date); // is completely after
+        const b = endDate < Date.parse(order.start_date); // or completely before
+        const c = order.id == order_id; // or the current order
+        console.log(a, b, c)
+        return a || b || c
       });
+      // console.log(dressOption);
+      console.log(noConflict);
+      return noConflict
   }
 
   handleChange(item, i) {
@@ -94,24 +104,26 @@ export default class DressSelect extends React.Component {
     }
 
     const selectedDressComponents = this.state.selectedDresses.map((dress) => {
-      const conflict = this.isConflict(dress);
+      const available = this.isAvailable(dress);
       return (
         <Chip
           onRequestDelete={() => this.removeDress(dress)}
           key={dress.id}
-          style={conflict ? {border: '2px solid red'} : {} }
+          style={available ? {} : {border: '2px solid red'}}
           >
           <DressThumbnail dress={dress} />
-          {conflict ? (
-            <div>
-              <span style={{color: 'red'}} >
-                This dress is not available for the selected dates.
-              </span>
-              <AlertError color="red"/>
-            </div>
-          ) : (
-            <ActionCheckCircle color="green"/>
-          )}
+            {
+              available ? (
+                <ActionCheckCircle color="green"/>
+              ) : (
+                <div>
+                  <span style={{color: 'red'}} >
+                    This dress is not available for the selected dates.
+                  </span>
+                  <AlertError color="red"/>
+                </div>
+              )
+            }
         </Chip>
       )
     })
