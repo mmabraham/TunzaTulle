@@ -32,30 +32,18 @@ export default class DressSelect extends React.Component {
 
   setDressItems() {
     this.allDressItems = this.props.dresses.map(dress => {
-      const available = this.isAvailable(dress);
       return ({
           text: `${dress.barcode}  -  ${dress.title}`,
-          value: (<MenuItem>
-                    <Chip
-                      onRequestDelete={() => this.removeDress(dress)}
-                      key={dress.id}
-                      style={available ? {} : {border: '2px solid red'} }
-                    >
-                      <DressThumbnail dress={dress} />
-                      {
-                        available ? (
-                          <ActionCheckCircle color="green"/>
-                        ) : (
-                          <div>
-                            <span style={{color: 'red'}} >
-                              This dress is not available for the selected dates.
-                            </span>
-                            <AlertError color="red"/>
-                          </div>
-                        )
-                      }
-                    </Chip>
-                  </MenuItem>),
+          value: (
+            <MenuItem>
+              <DressThumbnail
+                dress={dress}
+                key={dress.id}
+                onRemove={() => this.removeDress(dress)}
+                isAvailable={() => this.isAvailable(dress)}
+              />
+            </MenuItem>
+          )
         })
     })
     this.setState({dataSource: this.allDressItems})
@@ -104,27 +92,13 @@ export default class DressSelect extends React.Component {
     }
 
     const selectedDressComponents = this.state.selectedDresses.map((dress) => {
-      const available = this.isAvailable(dress);
       return (
-        <Chip
-          onRequestDelete={() => this.removeDress(dress)}
+        <DressThumbnail
+          dress={dress}
           key={dress.id}
-          style={available ? {} : {border: '2px solid red'}}
-          >
-          <DressThumbnail dress={dress} />
-            {
-              available ? (
-                <ActionCheckCircle color="green"/>
-              ) : (
-                <div>
-                  <span style={{color: 'red'}} >
-                    This dress is not available for the selected dates.
-                  </span>
-                  <AlertError color="red"/>
-                </div>
-              )
-            }
-        </Chip>
+          onRemove={() => this.removeDress(dress)}
+          isAvailable={() => this.isAvailable(dress)}
+        />
       )
     })
 
