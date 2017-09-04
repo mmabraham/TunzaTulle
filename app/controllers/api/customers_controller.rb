@@ -28,7 +28,7 @@ class Api::CustomersController < ApplicationController
   end
 
   def send_all_reminders
-    @orders = Order.includes(:customer, :dresses).event_was_yesterday
+    @orders = Order.includes(:customer, :dresses).reminder_due
     @orders.each do |order|
       msg = CustomerMailer.remind_to_return(order)
       msg.deliver_now

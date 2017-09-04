@@ -26,6 +26,10 @@ class Order < ActiveRecord::Base
     where("DATE(event_date) = ?", Date.today-1)
   end
 
+  def self.reminder_due
+    event_was_yesterday.where(reminder_sent: false)
+  end
+
   def self.past
     where('end_date < ?', Time.now)
   end
