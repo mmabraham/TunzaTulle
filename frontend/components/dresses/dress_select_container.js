@@ -5,8 +5,9 @@ import DressSelect from './dress_select';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
-  let ids;
+  let ids, order_id;
   if (ownProps.edit) {
+    order_id = ownProps.match.params.id;
     ids = ownProps.ids || []
   } else {
     ids = ownProps.match.params.id ? [ownProps.match.params.id] : []
@@ -15,6 +16,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     dresses: asArray(state.dresses),
     selectedDresses: byIds(state.dresses, ids),
+    order_id,
   }
 }
 

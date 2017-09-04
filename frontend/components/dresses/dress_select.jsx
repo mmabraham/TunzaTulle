@@ -32,17 +32,35 @@ export default class DressSelect extends React.Component {
 
   setDressItems() {
     this.allDressItems = this.props.dresses.map(dress => {
-      return (
-        {
+      const conflict = this.isConflict(dress);
+      return ({
           text: `${dress.barcode}  -  ${dress.title}`,
-          value: (<MenuItem><DressThumbnail dress={dress} /></MenuItem>),
-        }
-      )
+          value: (<MenuItem>
+                    <Chip
+                      onRequestDelete={() => this.removeDress(dress)}
+                      key={dress.id}
+                      style={conflict ? {border: '2px solid red'} : {} }
+                    >
+                      <DressThumbnail dress={dress} />
+                      {conflict ? (
+                        <div>
+                          <span style={{color: 'red'}} >
+                            This dress is not available for the selected dates.
+                          </span>
+                          <AlertError color="red"/>
+                        </div>
+                      ) : (
+                        <ActionCheckCircle color="green"/>
+                      )}
+                    </Chip>
+                  </MenuItem>),
+        })
     })
     this.setState({dataSource: this.allDressItems})
   }
 
   isConflict(dressOption) {
+    console.log(dressOption)
     const { startDate, endDate } = this.props.orderDates;
     return !this.props.selectedDresses.some(dress => dress.id === dressOption.id) &&
       dressOption.order_dates.some(order => {
