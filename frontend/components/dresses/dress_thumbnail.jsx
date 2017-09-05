@@ -9,7 +9,7 @@ const DressThumbnail = ({dress, isAvailable, onRemove}) => (
     onRequestDelete={onRemove}
     style={isAvailable() ? {} : {border: '2px solid red', minWidth: 200} }
     >
-    <Avatar src={dress.img} />
+    <Avatar src={dress.img} style={{borderRadius: '13%', height: '100', width: '80'}}/>
     <span style={{position: 'relative', bottom: 10, left: 5}} >
       {dress.barcode}
     </span>
