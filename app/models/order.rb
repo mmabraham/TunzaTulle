@@ -38,6 +38,18 @@ class Order < ActiveRecord::Base
     where('start_date > ?', Time.now)
   end
 
+  def self.by_status(status)
+    where(status: status)
+  end
+
+  def self.by_filters(filters)
+    orders = Order.all
+    if filters[:status]
+      orders = orders.by_status
+    end
+    orders
+  end
+
   belongs_to :customer
   has_many :dress_orders
   has_many :dresses, through: :dress_orders, source: :dress
