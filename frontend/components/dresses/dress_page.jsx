@@ -17,7 +17,7 @@ export default class DressPage extends React.Component {
   render() {
     const dress = this.props.dress;
     return !dress ? (null) : (
-      <Card>
+      <Card style={{width: '70%', margin: 'auto'}}>
         <CardHeader
           title={dress.title}
           subtitle={dress.color}
@@ -45,7 +45,7 @@ export default class DressPage extends React.Component {
             <FlatButton label="Create Order" />
           </NavLink>
         </CardActions>
-        <h1>Orders</h1>
+        <h1 style={{textAlign: 'center'}}>Orders</h1>
         <OrderList orders={dress.orders}/>
       </Card>
     )
