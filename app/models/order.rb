@@ -43,19 +43,20 @@ class Order < ActiveRecord::Base
   end
 
   def self.safe_phases(raw_phases)
-    safe = Set.new(:past, :current, :future)
+    safe = Set.new(['past', 'current', 'future'])
     raw_phases.select { |phase| safe.include?(phase)}
   end
 
   def self.by_phase(phases)
+    return all if phases.nil?
     safe_phases(phases)
       .reduce(Order.none) { |acc, phase| acc + send(phase) }
   end
 
-  def self.by_filters(filters)
-    all
-      .by_phase(filters[:phase])
+  def self.filter(filters)
+    self
       .by_status(filters[:status])
+      .by_phase(filters[:phase])
   end
 
   belongs_to :customer

@@ -32,10 +32,18 @@ export default class OrderList extends React.Component {
     ))
     return (
       <Paper className="order-list-page">
-        {this.props.customer_id ? null : (<FilterButtons
-          filters={['pending', 'approved', 'shipped', 'returned', 'canceled']}
-          onChange={(filters) => this.props.updateFilter('status', filters)}
-        />)}
+        {this.props.customer_id ? null : (
+            <div>
+              <FilterButtons
+                filters={['past', 'current', 'future']}
+                onChange={(filters) => this.props.updateFilter('phase', filters)}
+                />
+              <FilterButtons
+                filters={['pending', 'approved', 'shipped', 'returned', 'canceled']}
+                onChange={(filters) => this.props.updateFilter('status', filters)}
+                />
+            </div>
+        )}
         <Menu>{orders}</Menu>
       </Paper>
     )
