@@ -1,8 +1,10 @@
 import React from 'react';
 import LinearProgress from 'material-ui/LinearProgress';
-import OrderListItem from './order_list_item';
 import Paper from 'material-ui/Paper';
 import Menu from 'material-ui/Menu';
+
+import OrderListItem from './order_list_item';
+import FilterButtons from '../search/filter_buttons';
 
 export default class OrderList extends React.Component {
   constructor(props) {
@@ -30,6 +32,10 @@ export default class OrderList extends React.Component {
     ))
     return (
       <Paper className="order-list-page">
+        <FilterButtons
+          filters={['pending', 'approved', 'shipped', 'returned', 'canceled']}
+          onChange={console.log}
+        />
         <Menu>{orders}</Menu>
       </Paper>
     )
