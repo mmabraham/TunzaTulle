@@ -18,16 +18,8 @@ class Order < ActiveRecord::Base
   validate :starts_before_event, :ends_after_event, :has_no_conflicting_orders
   validates :status, inclusion: ['pending', 'approved', 'shipped', 'returned', 'canceled']
 
-  def self.active
+  def self.current
     where('? BETWEEN start_date AND end_date', Time.now)
-  end
-
-  def self.event_was_yesterday
-    where("DATE(event_date) = ?", Date.today-1)
-  end
-
-  def self.reminder_due
-    event_was_yesterday.where(reminder_sent: false)
   end
 
   def self.past
@@ -38,16 +30,32 @@ class Order < ActiveRecord::Base
     where('start_date > ?', Time.now)
   end
 
+  def self.event_was_yesterday
+    where("DATE(event_date) = ?", Date.today-1)
+  end
+
+  def self.reminder_due
+    event_was_yesterday.where(reminder_sent: false)
+  end
+
   def self.by_status(status)
-    where(status: status)
+    status ? where(status: status) : self
+  end
+
+  def self.safe_phases(raw_phases)
+    safe = Set.new(:past, :current, :future)
+    raw_phases.select { |phase| safe.include?(phase)}
+  end
+
+  def self.by_phase(phases)
+    safe_phases(phases)
+      .reduce(Order.none) { |acc, phase| acc + send(phase) }
   end
 
   def self.by_filters(filters)
-    orders = Order.all
-    if filters[:status]
-      orders = orders.by_status(filters[:status])
-    end
-    orders
+    all
+      .by_phase(filters[:phase])
+      .by_status(filters[:status])
   end
 
   belongs_to :customer
@@ -75,6 +83,7 @@ class Order < ActiveRecord::Base
   end
 
   private
+
 
   def overlapping_orders
     Order
