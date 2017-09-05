@@ -39,7 +39,6 @@ export default class DressSelect extends React.Component {
               <DressThumbnail
                 dress={dress}
                 key={dress.id}
-                onRemove={() => this.removeDress(dress)}
                 isAvailable={() => this.isAvailable(dress)}
               />
             </MenuItem>
@@ -50,21 +49,13 @@ export default class DressSelect extends React.Component {
   }
 
   isAvailable(dressOption) {
-    // console.log(dressOption)
-    // console.log(this.props.order_id)
-    console.log(this.props.orderDates)
     const order_id = this.props.order_id;
     const { startDate, endDate } = this.props.orderDates;
-    const noConflict = dressOption.order_dates.every(order => {
-        const a = startDate > Date.parse(order.end_date); // is completely after
-        const b = endDate < Date.parse(order.start_date); // or completely before
-        const c = order.id == order_id; // or the current order
-        console.log(a, b, c)
-        return a || b || c
-      });
-      // console.log(dressOption);
-      console.log(noConflict);
-      return noConflict
+    return dressOption.order_dates.every(order => {
+      return startDate > Date.parse(order.end_date) || // is completely after
+        endDate < Date.parse(order.start_date) || // or completely before
+        order.id == order_id; // or the current order
+    });
   }
 
   handleChange(item, i) {

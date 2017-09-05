@@ -7,7 +7,7 @@ import ActionCheckCircle from 'material-ui/svg-icons/action/check-circle';
 const DressThumbnail = ({dress, isAvailable, onRemove}) => (
   <Chip
     onRequestDelete={onRemove}
-    style={isAvailable() ? {} : {border: '2px solid red'} }
+    style={isAvailable() ? {} : {border: '2px solid red', minWidth: 200} }
     >
     <Avatar src={dress.img} />
     <span style={{position: 'relative', bottom: 10, left: 5}} >
