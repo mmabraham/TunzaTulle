@@ -103,7 +103,6 @@ export default class DressSelect extends React.Component {
             floatingLabelText="Dress"
             fullWidth={true}
             openOnFocus={true}
-            maxSearchResults={5}
             dataSource={this.state.dataSource}
             filter={AutoComplete.fuzzyFilter}
             onNewRequest={this.handleChange.bind(this)}

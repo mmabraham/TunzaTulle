@@ -10,8 +10,11 @@ const DressThumbnail = ({dress, isAvailable, onRemove}) => (
     style={isAvailable() ? {} : {border: '3px solid red'} }
     labelStyle={{minWidth: 200, paddingTop: 10}}
     >
-    <Avatar src={dress.img} style={{borderRadius: '15%', height: '102', width: '80', padding: 5}}/>
-    <span style={{position: 'relative', bottom: 10, left: 5}} >
+    <Avatar
+      src={dress.img}
+      style={{borderRadius: '15%', height: 102, width: 80, padding: 5}}
+      />
+    <span>
       {dress.barcode}
     </span>
     <br />
