@@ -1,10 +1,10 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
 import SelectField from 'material-ui/SelectField';
 import DatePicker from 'material-ui/DatePicker';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import CustomerSelect from '../customers/customer_select_container';
-import CustomerForm from '../customers/customer_form_container';
 import DressSelect from '../dresses/dress_select_container';
 
 export default class OrderForm extends React.Component {
@@ -63,9 +63,19 @@ export default class OrderForm extends React.Component {
   }
 
   render() {
+    const style = {
+      padding: 30,
+      width: '60%',
+      minWidth: 500,
+      position: 'relative',
+      top: 100,
+      bottom: 200,
+      left: '25%',
+    };
+
     const errors = this.props.errors;
     return (
-      <form>
+      <Paper style={style} zDepth={5} >
         <DressSelect
           onSelect={this.handleChange('dress_ids')}
           ids={this.state.dress_ids}
@@ -77,16 +87,29 @@ export default class OrderForm extends React.Component {
           />
         <br />
         <CustomerSelect onSelect={this.handleChange('customer_id')} initialCustomerId={this.state.customer_id}/>
-        <CustomerForm />
         <br />
+        <SelectField
+          floatingLabelText="Status"
+          value={this.state.status}
+          onChange={this.handleChange('status')}
+          errorText={ errors ? errors.status : '' }
+          >
+          <MenuItem value={'pending'} primaryText="Pending" />
+          <MenuItem value={'approved'} primaryText="Approved" />
+          <MenuItem value={'shipped'} primaryText="Shipped" />
+          <MenuItem value={'returned'} primaryText="Returned" />
+          <MenuItem value={'canceled'} primaryText="Canceled" />
+        </SelectField>
         <DatePicker
           floatingLabelText="Wedding Date"
+          fullWidth={true}
           autoOk={true}
           onChange={this.handleEventChange}
           value={this.state.event_date}
           errorText={ errors ? errors.event_date : '' }
         />
         <DatePicker
+          fullWidth={true}
           floatingLabelText="Shipping Date"
           autoOk={true}
           onChange={this.handleChange('start_date')}
@@ -94,29 +117,17 @@ export default class OrderForm extends React.Component {
           errorText={ errors ? errors.start_date : '' }
         />
         <DatePicker
+          fullWidth={true}
           floatingLabelText="Return-By Date"
           autoOk={true}
           onChange={this.handleChange('end_date')}
           value={this.state.end_date}
           errorText={ errors ? errors.end_date : '' }
         />
-        <SelectField
-          fullWidth={true}
-          floatingLabelText="Status"
-          value={this.state.status}
-          onChange={this.handleChange('status')}
-          errorText={ errors ? errors.status : '' }
-        >
-          <MenuItem value={'pending'} primaryText="Pending" />
-          <MenuItem value={'approved'} primaryText="Approved" />
-          <MenuItem value={'shipped'} primaryText="Shipped" />
-          <MenuItem value={'returned'} primaryText="Returned" />
-          <MenuItem value={'canceled'} primaryText="Canceled" />
-        </SelectField>
-        <RaisedButton primary={true} onTouchTap={this.handleSubmit}>
+        <RaisedButton primary={true} onTouchTap={this.handleSubmit} fullWidth={true}>
           Save
         </RaisedButton>
-      </form>
+      </Paper>
     )
   }
 }

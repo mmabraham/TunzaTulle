@@ -101,6 +101,7 @@ export default class DressSelect extends React.Component {
         {this.allDressItems ? (
           <AutoComplete
             floatingLabelText="Dress"
+            fullWidth={true}
             openOnFocus={true}
             maxSearchResults={5}
             dataSource={this.state.dataSource}

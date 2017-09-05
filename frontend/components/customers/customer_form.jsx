@@ -1,5 +1,4 @@
 import React from 'react';
-// import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -54,59 +53,60 @@ export default class CustomerForm extends React.Component {
       />)
     ]
 
-    return (
-      <div>
-        { this.state.open ? (
-          <Dialog zDepth={5}
-            title={this.props.id ? 'Edit customer info' : 'Add a new customer'}
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.toggle}
-            >
-            <TextField
-              fullWidth={true}
-              floatingLabelText="Name"
-              onChange={this.handleChange('name')}
-              value={this.state.name}
-              errorText={ errors ? errors.name : '' }
-              />
-            <TextField
-              fullWidth={true}
-              floatingLabelText="Email"
-              onChange={this.handleChange('email')}
-              value={this.state.email}
-              errorText={ errors ? errors.email : '' }
-              />
-            <TextField
-              fullWidth={true}
-              floatingLabelText="Phone Number"
-              onChange={this.handleChange('phone_number')}
-              value={this.state.phone_number}
-              errorText={ errors ? errors.phone_number : '' }
-              />
-            <TextField
-              fullWidth={true}
-              floatingLabelText="Address"
-              onChange={this.handleChange('address')}
-              value={this.state.address}
-              errorText={ errors ? errors.address : '' }
-              />
-            <TextField
-              fullWidth={true}
-              floatingLabelText="Notes"
-              onChange={this.handleChange('notes')}
-              value={this.state.notes}
-              multiLine={true}
-              errorText={ errors ? errors.notes : '' }
-              />
-          </Dialog>
-        ) : (
-          <FloatingActionButton onTouchTap={this.toggle}>
-            <ContentAdd />
-          </FloatingActionButton>
-        )}
-      </div>
-    )
+    if (this.state.open) {
+      return (
+        <Dialog zDepth={5}
+          title={this.props.id ? 'Edit customer info' : 'Add a new customer'}
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.toggle}
+          >
+          <TextField
+            fullWidth={true}
+            floatingLabelText="Name"
+            onChange={this.handleChange('name')}
+            value={this.state.name}
+            errorText={ errors ? errors.name : '' }
+            />
+          <TextField
+            fullWidth={true}
+            floatingLabelText="Email"
+            onChange={this.handleChange('email')}
+            value={this.state.email}
+            errorText={ errors ? errors.email : '' }
+            />
+          <TextField
+            fullWidth={true}
+            floatingLabelText="Phone Number"
+            onChange={this.handleChange('phone_number')}
+            value={this.state.phone_number}
+            errorText={ errors ? errors.phone_number : '' }
+            />
+          <TextField
+            fullWidth={true}
+            floatingLabelText="Address"
+            onChange={this.handleChange('address')}
+            value={this.state.address}
+            errorText={ errors ? errors.address : '' }
+            />
+          <TextField
+            fullWidth={true}
+            floatingLabelText="Notes"
+            onChange={this.handleChange('notes')}
+            value={this.state.notes}
+            multiLine={true}
+            errorText={ errors ? errors.notes : '' }
+            />
+        </Dialog>
+
+      )
+    } else {
+      return (
+        <FloatingActionButton onTouchTap={this.toggle}>
+          <ContentAdd />
+        </FloatingActionButton>
+      )
+    }
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import CustomerForm from '../customers/customer_form_container';
 import AutoComplete from 'material-ui/AutoComplete';
 import CircularProgress from 'material-ui/CircularProgress';
 
@@ -35,14 +36,18 @@ export default class CustomerSelect extends React.Component {
   render() {
     const initialCustomer = this.props.customers.find(customer => customer.id === this.props.initialCustomerId);
     return this.allCustomerItems ? (
-      <AutoComplete
-        hintText={(initialCustomer && initialCustomer.name) || 'Customer'}
-        openOnFocus={true}
-        maxSearchResults={5}
-        dataSource={this.state.dataSource}
-        filter={AutoComplete.fuzzyFilter}
-        onNewRequest={this.handleChange.bind(this)}
-      />
-  ) : ( <CircularProgress /> );
+      <div>
+        <AutoComplete
+
+          hintText={(initialCustomer && initialCustomer.name) || 'Customer'}
+          openOnFocus={true}
+          maxSearchResults={5}
+          dataSource={this.state.dataSource}
+          filter={AutoComplete.fuzzyFilter}
+          onNewRequest={this.handleChange.bind(this)}
+        />
+        <CustomerForm />
+      </div>
+    ) : ( <CircularProgress /> );
   }
 }
