@@ -28,14 +28,19 @@ class Api::CustomersController < ApplicationController
   end
 
   def send_all_reminders
-    @orders = Order.includes(:customer, :dresses).reminder_due
-    @orders.each do |order|
-      msg = CustomerMailer.remind_to_return(order)
-      msg.deliver_now
-      order.reminder_sent = true
-    end
+    if Time.new.hour < 6
+      render json: "Too early"
+    else
+      @orders = Order.includes(:customer, :dresses).reminder_due
+      @orders.each do |order|
+        msg = CustomerMailer.remind_to_return(order)
+        msg.deliver_now
+        order.reminder_sent = true
+        order.save
+      end
 
-    render json: "Sent #{@orders.count} reminders"
+      render json: "Sent #{@orders.count} reminders"
+    end
   end
 
   def customer_params
