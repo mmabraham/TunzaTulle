@@ -45,7 +45,7 @@ class Order < ActiveRecord::Base
   def self.by_filters(filters)
     orders = Order.all
     if filters[:status]
-      orders = orders.by_status
+      orders = orders.by_status(filters[:status])
     end
     orders
   end

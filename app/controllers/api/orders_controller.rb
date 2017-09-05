@@ -9,6 +9,7 @@ class Api::OrdersController < ApplicationController
     else
       @orders = Order
         .includes(:customer, :dress_orders ,:dresses)
+        .by_filters(params)
         .order(:start_date)
     end
     render :index

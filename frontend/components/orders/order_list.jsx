@@ -32,10 +32,10 @@ export default class OrderList extends React.Component {
     ))
     return (
       <Paper className="order-list-page">
-        <FilterButtons
+        {this.props.customer_id ? null : (<FilterButtons
           filters={['pending', 'approved', 'shipped', 'returned', 'canceled']}
-          onChange={console.log}
-        />
+          onChange={(filters) => this.props.updateFilter('status', filters)}
+        />)}
         <Menu>{orders}</Menu>
       </Paper>
     )
