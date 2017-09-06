@@ -6,6 +6,7 @@ import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/MenuItem';
 import FilterButtons from './filter_buttons';
+import RangeSlider from './range_slider';
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -48,6 +49,11 @@ export default class SearchBar extends React.Component {
             floatingLabelText="Max Price (in cents)"
             onChange={this.handleFilterChange('price[max]')}
             value={(this.state.price && this.state.price.max) || (this.props.price && this.props.price.max)}
+            />
+          <RangeSlider
+            max={50000}
+            min={0}
+            onChange={this.handleFilterChange('price')}
             />
           <TextField
             floatingLabelText="Color"
