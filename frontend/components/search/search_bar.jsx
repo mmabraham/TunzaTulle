@@ -5,6 +5,7 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/MenuItem';
+import FilterButtons from './filter_buttons';
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -40,16 +41,10 @@ export default class SearchBar extends React.Component {
           focusedInput={this.state.focusedInput}
           onFocusChange={focusedInput => this.setState({ focusedInput })}
         />
-
-        <SelectField
-          value={this.state.sleeve_length}
-          onChange={this.handleFilterChange('sleeve_length')}
-          >
-          <MenuItem primaryText="Sleeve length"/>
-          <MenuItem value={'long'} primaryText="Long" />
-          <MenuItem value={'half length'} primaryText="Half Length" />
-          <MenuItem value={'3 / 4'} primaryText="3 / 4" />
-        </SelectField>
+        <FilterButtons
+          filters={['long', 'half length', '3 / 4']}
+          onChange={(val) => (this.handleFilterChange('sleeve_length')(null, null, val))}
+        />
 
         <TextField
           floatingLabelText="Waist"
