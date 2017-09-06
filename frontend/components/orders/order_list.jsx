@@ -32,7 +32,7 @@ export default class OrderList extends React.Component {
     ))
     return (
       <Paper className="order-list-page">
-        {this.props.customer_id ? null : (
+        {this.props.customer_id || !this.props.filters ? null : (
             <div>
               <FilterButtons
                 filters={['past', 'current', 'future']}
