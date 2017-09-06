@@ -23,6 +23,7 @@ export default class RangeSlider extends React.Component {
     return (
       <div>
         <Slider
+          sliderStyle={{top: 33}}
           min={this.props.min}
           max={this.props.max}
           step={this.props.step || 1}
@@ -31,12 +32,13 @@ export default class RangeSlider extends React.Component {
           onDragStop={handleStop}
         />
         <Slider
+          sliderStyle={{top: -33}}
           min={this.props.min}
           max={this.props.max}
           step={this.props.step || 1}
           value={this.state.max}
           onChange={this.handleSlide('max')}
-          onDragStop={this.handleStop}
+          onDragStop={handleStop}
         />
       </div>
     )
