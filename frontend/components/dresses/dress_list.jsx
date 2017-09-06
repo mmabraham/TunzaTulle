@@ -26,7 +26,7 @@ export default class DressList extends React.Component {
     return (
       <main className="dress-list-page">
         <SearchBar />
-        <GridList cellHeight={400} cols={Math.ceil((window.innerWidth - 200) / 420)} padding={10}>{dresses}</GridList>
+        <GridList cellHeight={400} cols={Math.ceil(window.innerWidth / 450)} padding={10}>{dresses}</GridList>
       </main>
     )
   }
