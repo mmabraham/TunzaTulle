@@ -33,50 +33,56 @@ class Dress < ActiveRecord::Base
   has_many :customers, through: :orders, source: :customer
 
   def self.filter(filters)
-    dresses = Dress.all
-    return dresses unless filters
-    dresses = Dress.by_dates(filters[:dates], dresses) if filters[:dates]
-    dresses = Dress.by_height(filters[:height], dresses) if filters[:height]
-    dresses = Dress.by_waist(filters[:waist], dresses) if filters[:waist]
-    dresses = Dress.by_price(filters[:price], dresses) if filters[:price]
-    dresses = Dress.by_sleeve_length(filters[:sleeve_length], dresses) if filters[:sleeve_length]
-    dresses = Dress.by_color(filters[:color], dresses) if filters[:color]
-    dresses
+    return all unless filters
+    all
+      .by_dates(filters[:dates])
+      .by_height(filters[:height])
+      .by_waist(filters[:waist])
+      .by_price(filters[:price])
+      .by_sleeve_length(filters[:sleeve_length])
+      .by_color(filters[:color])
   end
 
-  private
+  def self.by_dates(dates)
+    return all if dates.nil?
 
-  def self.by_dates(dates, dresses = Dress.all)
     start = Time.parse(dates[:start_date])
     finish = Time.parse(dates[:end_date])
-
-    dresses.where.not(
-      id: Order.conflicting(start, finish).joins(:dress_orders).select('dress_orders.dress_id')
+    where.not(
+      id: Order
+        .conflicting(start, finish)
+        .joins(:dress_orders)
+        .select('dress_orders.dress_id')
     )
   end
 
-  def self.by_height(height, dresses)
-    dresses.where(height: height)
+  def self.by_height(height)
+    return all if height.nil? || height.empty?
+    where(height: height)
   end
 
-  def self.by_waist(waist, dresses)
-    dresses
-      .where('min_waist <= ?', waist)
+  def self.by_waist(waist)
+    return all if waist.nil? || waist.empty?
+
+    where('min_waist <= ?', waist)
       .where('max_waist >= ?', waist)
   end
 
-  def self.by_price(price, dresses)
+  def self.by_price(price)
+    return all if price.nil? || price.empty?
     min, max = price[:min], price[:max]
-    dresses
-    .where('price <= ?', max)
-    .where('price >= ?', min || 0)
+
+    where('price <= ?', max)
+      .where('price >= ?', min || 0)
   end
 
-  def self.by_sleeve_length(sleeve_length, dresses)
-    dresses.where(sleeve_length: sleeve_length)
+  def self.by_sleeve_length(sleeve_length)
+    return all if sleeve_length.nil? || sleeve_length.empty?
+    where(sleeve_length: sleeve_length)
   end
 
-  def self.by_color(color, dresses)
-    dresses.where(color: color)
+  def self.by_color(color)
+    return all if color.nil? || color.empty?
+    where(color: color)
   end
 end

@@ -26,8 +26,9 @@ export default class SearchBar extends React.Component {
 
   handleFilterChange(filterType) {
     return (e, i, val) => {
-      this.setState({[filterType]: val || e.target.value});
-      this.props.updateFilter(filterType, val || e.target.value);
+      const value = val || e.target.value;
+      this.setState({[filterType]: value});
+      this.props.updateFilter(filterType, value);
     }
   }
 
