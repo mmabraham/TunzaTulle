@@ -34,22 +34,22 @@ export default class SearchBar extends React.Component {
   render() {
     return (
       <div className="search-bar">
-        <FilterButtons
-          filters={['long', 'half', '3 / 4']}
-          onChange={(val) => (this.handleFilterChange('sleeve_length')(null, null, val))}
-          />
+          <FilterButtons
+            filters={['long', 'half', '3 / 4']}
+            onChange={(val) => (this.handleFilterChange('sleeve_length')(null, null, val))}
+            />
 
-        <TextField
-          floatingLabelText="Waist"
-          onChange={this.handleFilterChange('waist')}
-          value={this.state.waist || this.props.waist }
-          />
+          <TextField
+            floatingLabelText="Waist"
+            onChange={this.handleFilterChange('waist')}
+            value={this.state.waist || this.props.waist }
+            />
 
-        <TextField
-          floatingLabelText="Height"
-          onChange={this.handleFilterChange('height')}
-          value={this.state.height || this.props.height}
-          />
+          <TextField
+            floatingLabelText="Height"
+            onChange={this.handleFilterChange('height')}
+            value={this.state.height || this.props.height}
+            />
         <DateRangePicker
           startDate={this.state.startDate}
           endDate={this.state.endDate}

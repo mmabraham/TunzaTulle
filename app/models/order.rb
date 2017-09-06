@@ -18,6 +18,10 @@ class Order < ActiveRecord::Base
   validate :starts_before_event, :ends_after_event, :has_no_conflicting_orders
   validates :status, inclusion: ['pending', 'approved', 'shipped', 'returned', 'canceled']
 
+  def self.conflicting(start_date, end_date)
+    where('start_date <= ? AND end_date >= ?', end_date, start_date)
+  end
+
   def self.current
     where('? BETWEEN start_date AND end_date', Time.now)
   end
@@ -85,16 +89,15 @@ class Order < ActiveRecord::Base
 
   private
 
-
   def overlapping_orders
     Order
-    .where('start_date <= ? AND end_date >= ?', end_date, start_date)
-    .where.not(id: id)
+      .conflicting(start_date, end_date)
+      .where.not(id: id)
   end
 
   def conflicting_orders
     overlapping_orders
-    .joins(:dress_orders)
-    .where('dress_orders.dress_id' => self.dresses)
+      .joins(:dress_orders)
+      .where('dress_orders.dress_id' => self.dresses)
   end
 end
