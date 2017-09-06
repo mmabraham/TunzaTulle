@@ -70,7 +70,7 @@ class Dress < ActiveRecord::Base
 
   def self.by_price(price)
     return all if price.nil? || price.empty?
-    min, max = price[:min], price[:max]
+    min, max = price[:min].to_s.to_i, price[:max].to_s.to_i
 
     where('price <= ?', max)
       .where('price >= ?', min || 0)

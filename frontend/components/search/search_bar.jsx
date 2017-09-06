@@ -39,6 +39,21 @@ export default class SearchBar extends React.Component {
             filters={['long', 'half', '3 / 4']}
             onChange={(val) => (this.handleFilterChange('sleeve_length')(null, null, val))}
             />
+          <TextField
+            floatingLabelText="Min Price (in cents)"
+            onChange={this.handleFilterChange('price[min]')}
+            value={(this.state.price && this.state.price.min) || (this.props.price && this.props.price.min) }
+            />
+          <TextField
+            floatingLabelText="Max Price (in cents)"
+            onChange={this.handleFilterChange('price[max]')}
+            value={(this.state.price && this.state.price.max) || (this.props.price && this.props.price.max)}
+            />
+          <TextField
+            floatingLabelText="Color"
+            onChange={this.handleFilterChange('color')}
+            value={this.state.color || this.props.color }
+            />
 
           <TextField
             floatingLabelText="Waist"
