@@ -28,6 +28,8 @@ gem "paperclip", "~> 5.0.0"
 
 gem 'rails_12factor'
 
+gem 'active_record_union'
+
 gem 'figaro'
 gem 'aws-sdk', '>= 2.0'
 # Use Unicorn as the app server
