@@ -34,7 +34,7 @@ export default class CustomerSelect extends React.Component {
   }
 
   render() {
-    const initialCustomer = this.props.customers.find(customer => customer.id === this.props.initialCustomerId);
+    const initialCustomer = this.props.customers.find(customer => customer.id == this.props.initialCustomerId);
     return this.allCustomerItems ? (
       <div>
         <AutoComplete
@@ -46,7 +46,7 @@ export default class CustomerSelect extends React.Component {
           filter={AutoComplete.fuzzyFilter}
           onNewRequest={this.handleChange.bind(this)}
         />
-        <CustomerForm />
+      <CustomerForm onCreate={this.handleChange.bind(this)}/>
       </div>
     ) : ( <CircularProgress /> );
   }
