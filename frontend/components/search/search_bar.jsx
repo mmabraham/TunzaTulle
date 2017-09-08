@@ -50,12 +50,6 @@ export default class SearchBar extends React.Component {
             onChange={this.handleFilterChange('price[max]')}
             value={(this.state.price && this.state.price.max) || (this.props.price && this.props.price.max)}
             />
-
-          <RangeSlider
-            max={50000}
-            min={0}
-            onChange={this.handleFilterChange('price')}
-            />
           <TextField
             floatingLabelText="Color"
             onChange={this.handleFilterChange('color')}
