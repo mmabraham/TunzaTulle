@@ -24,7 +24,16 @@ export default class DressForm extends React.Component {
 
   handleChange(field) {
     return (e, i, val) => {
-      this.setState({[field]: e.target.value || val})
+      this.setState({[field]: val || e.target.value})
+    }
+  }
+
+  handleRangeChange(field, deviations) {
+    return (e, i, val) => {
+      val = parseFloat(val || e.target.value);
+      this.handleChange(field)(null, null, val);
+      this.handleChange('min_' + field)(null, null, val + deviations[0]);
+      this.handleChange('max_' + field)(null, null, val + deviations[1]);
     }
   }
 
@@ -41,7 +50,7 @@ export default class DressForm extends React.Component {
 
   handleSubmit() {
     this.props.submit(this.state)
-      .then(id => this.props.history.push(`/dresses/${id}`));
+      .then(res => this.props.history.push(`/dresses/${this.props.id || Object.keys(res)[0]}`));
   }
 
   render() {
@@ -83,7 +92,7 @@ export default class DressForm extends React.Component {
 
           <TextField
             floatingLabelText="Waist"
-            onChange={this.handleChange('waist')}
+            onChange={this.handleRangeChange('waist', [-1.5, 1.5])}
             value={this.state.waist || this.props.waist }
             errorText={ errors ? errors.waist : '' }
             />
@@ -91,14 +100,14 @@ export default class DressForm extends React.Component {
           <TextField
             floatingLabelText="Min Waist"
             onChange={this.handleChange('min_waist')}
-            value={this.state.min_waist || this.props.min_waist || (this.state.waist && this.state.waist)}
+            value={this.state.min_waist || this.props.min_waist || (this.state.waist && this.state.waist - 1.5)}
             errorText={ errors ? errors.min_waist : '' }
             />
 
           <TextField
             floatingLabelText="Max Waist"
             onChange={this.handleChange('max_waist')}
-            value={this.state.max_waist || this.props.max_waist || (this.state.waist && this.state.waist + '.5')}
+            value={this.state.max_waist || this.props.max_waist || (this.state.waist && parseFloat(this.state.waist) + 1.5)}
             errorText={ errors ? errors.max_waist : '' }
             />
 
