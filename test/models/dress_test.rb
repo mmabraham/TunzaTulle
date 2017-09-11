@@ -18,6 +18,11 @@
 #  image_content_type :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
+#  min_height         :decimal(, )      not null
+#  max_height         :decimal(, )      not null
+#  age                :integer          not null
+#  min_age            :integer          not null
+#  max_age            :integer          not null
 #
 
 require 'test_helper'

@@ -18,12 +18,18 @@
 #  image_content_type :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
+#  min_height         :decimal(, )      not null
+#  max_height         :decimal(, )      not null
+#  age                :integer          not null
+#  min_age            :integer          not null
+#  max_age            :integer          not null
 #
 
 class Dress < ActiveRecord::Base
   validates :title, :color, :waist, :min_waist, :max_waist,
     :age, :min_age, :max_age, :height, :min_height, :max_height,
     :sleeve_length, presence: true
+  validate :ranges
 
   has_attached_file :image, default_url: "missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
@@ -85,5 +91,21 @@ class Dress < ActiveRecord::Base
   def self.by_color(color)
     return all if color.nil? || color.empty?
     where(color: color)
+  end
+
+  private
+
+  def ranges
+    [:age, :waist, :height].each { |field| check_range(field) }
+  end
+
+  def check_range(field)
+    min, mid, max = send("min_#{field}"), send(field), send("max_#{field}")
+    if min && mid && min > mid
+      errors["min_#{field}".to_sym] << "min_#{field} cannot be greater than #{field}"
+    end
+    if max && mid &&  max < mid
+      errors["max_#{field}".to_sym] << "max_#{field} cannot be less than #{field}"
+    end
   end
 end
