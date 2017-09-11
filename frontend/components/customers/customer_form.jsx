@@ -35,7 +35,9 @@ export default class CustomerForm extends React.Component {
 
   handleSubmit() {
     this.props.processForm(this.state)
-      .then(({customer}) => this.props.onCreate({value: Object.keys(customer)[0]}))
+      .then(({customer}) => {
+        this.props.onCreate && this.props.onCreate({value: Object.keys(customer)[0]})
+      })
       .then(() => this.toggle())
   }
 
