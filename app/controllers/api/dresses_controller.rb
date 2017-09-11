@@ -39,7 +39,10 @@ class Api::DressesController < ApplicationController
   private
 
   def dress_params
-    params.require(:dress).permit(:title, :color, :waist, :min_waist,
-      :max_waist, :sleeve_length, :height, :image, :description, :barcode)
+    params.require(:dress).permit(
+      :title, :color, :waist, :min_waist,
+      :max_waist, :sleeve_length, :height, :min_height, :max_height,
+      :age, :min_age, :max_age, :image, :description, :barcode
+    )
   end
 end
