@@ -46,7 +46,7 @@ class Dress < ActiveRecord::Base
       .by_waist(filters[:waist])
       .by_age(filters[:age])
       .by_sleeve_length(filters[:sleeve_length])
-      .by_color(filters[:color])
+      .by_query(filters[:query])
   end
 
   def self.by_dates(dates)
@@ -88,9 +88,13 @@ class Dress < ActiveRecord::Base
     where(sleeve_length: sleeve_length)
   end
 
-  def self.by_color(color)
-    return all if color.nil? || color.empty?
-    where(color: color)
+  def self.by_query(query)
+    return all if query.nil? || query.empty?
+    pattern = "%#{query}%"
+    where(
+      'barcode LIKE ? OR color LIKE ? OR description LIKE ? OR title LIKE ?',
+      pattern, pattern,   pattern, pattern
+    )
   end
 
   private

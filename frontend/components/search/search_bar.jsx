@@ -41,9 +41,9 @@ export default class SearchBar extends React.Component {
             onChange={(val) => (this.handleFilterChange('sleeve_length')(null, null, val))}
             />
           <TextField
-            floatingLabelText="Color"
-            onChange={this.handleFilterChange('color')}
-            value={this.state.color || this.props.color }
+            floatingLabelText="Search"
+            onChange={this.handleFilterChange('query')}
+            value={this.state.query|| this.props.query }
             />
           <TextField
             floatingLabelText="Waist"
