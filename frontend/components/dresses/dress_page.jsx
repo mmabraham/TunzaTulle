@@ -27,7 +27,7 @@ export default class DressPage extends React.Component {
           overlay={
             <CardTitle
               title={`${dress.waist} - ${dress.height}`}
-              subtitle={`$ ${parseInt(dress.price / 100, 10)}.${parseInt(dress.price % 100, 10)}`}
+              subtitle={`${}`}
             />
           }
         >

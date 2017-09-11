@@ -21,7 +21,6 @@ export default class OrderPage extends React.Component {
     const order = this.props.order;
     order.customer.withoutOrders = true;
     const dresses = order.dresses;
-    const totalPrice = order.dresses.reduce((sum, dress) => sum + parseInt(dress.price, 10), 0)
     return (
       <Card style={{width: '80%', padding: 30}}>
         <CardHeader
@@ -30,7 +29,7 @@ export default class OrderPage extends React.Component {
         />
         <CardTitle
           title={`${new Date(order.start_date).toDateString()} - ${new Date(order.end_date).toDateString()}`}
-          subtitle={`Total Price: $ ${parseInt(totalPrice / 100, 10)}.${parseInt(totalPrice % 100, 10)}`}
+          subtitle={``}
         />
       <CardTitle title={order.status} subtitle={moment.default(order.event_date).fromNow()} />
         <CustomerDetail customer={order.customer}/>
