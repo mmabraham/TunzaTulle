@@ -18,7 +18,6 @@ export const createDress = dress => {
     method: 'POST',
     url: `/api/dresses`,
     data: { dress },
-    error: res => console.log(res),
   })
 }
 
@@ -27,7 +26,6 @@ export const updateDress = (dress, id) => {
     method: 'PATCH',
     url: `/api/dresses/${id}`,
     data: { dress },
-    error: res => console.log(res),
   })
 }
 

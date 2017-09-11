@@ -102,10 +102,10 @@ class Dress < ActiveRecord::Base
   def check_range(field)
     min, mid, max = send("min_#{field}"), send(field), send("max_#{field}")
     if min && mid && min > mid
-      errors["min_#{field}".to_sym] << "min_#{field} cannot be greater than #{field}"
+      errors["min_#{field}".to_sym] << "can't be greater than #{field}"
     end
     if max && mid &&  max < mid
-      errors["max_#{field}".to_sym] << "max_#{field} cannot be less than #{field}"
+      errors["max_#{field}".to_sym] << "can't be less than #{field}"
     end
   end
 end

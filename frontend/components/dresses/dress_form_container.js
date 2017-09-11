@@ -7,7 +7,8 @@ const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
   return {
     id,
-    dress: state.dresses[id]
+    dress: state.dresses[id],
+    errors: state.errors,
   }
 }
 
