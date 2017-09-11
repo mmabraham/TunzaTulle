@@ -37,7 +37,7 @@ export default class SearchBar extends React.Component {
     return (
       <div className="search-bar">
           <FilterButtons
-            filters={['long', 'half', '3 / 4']}
+            filters={['long', '3 / 4', 'above elbow', 'short']}
             onChange={(val) => (this.handleFilterChange('sleeve_length')(null, null, val))}
             />
           <TextField
@@ -71,14 +71,3 @@ export default class SearchBar extends React.Component {
     )
   }
 }
-
-//
-// <RadioButtonGroup
-//   valueSelected={this.state.sleeve_length}
-//   onChange={this.handleFilterChange('sleeve_length')}
-//   >
-//   <MenuItem value={null} label="Sleeve length"/>
-//   <MenuItem value={'long'} label="Long" />
-//   <MenuItem value={'half length'} label="Half Length" />
-//   <MenuItem value={'3 / 4'} label="3 / 4" />
-// </RadioButtonGroup>

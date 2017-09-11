@@ -40,7 +40,7 @@ dresses = []
     waist: waist,
     min_waist: waist - 1.5,
     max_waist: waist + 1.5,
-    sleeve_length: ['long', 'half length', 'Half Length', '3 / 4'].sample,
+    sleeve_length: ['long', '3 / 4', 'above elbow', 'short'].sample,
     height: height,
     min_height: height - 7,
     max_height: height + 2,

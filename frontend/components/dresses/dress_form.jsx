@@ -151,8 +151,9 @@ export default class DressForm extends React.Component {
             onChange={this.handleChange('sleeve_length')}
             >
             <MenuItem value={'long'} primaryText="Long" />
-            <MenuItem value={'half length'} primaryText="Half Length" />
             <MenuItem value={'3 / 4'} primaryText="3 / 4" />
+            <MenuItem value={'above elbow'} primaryText="Above Elbow" />
+            <MenuItem value={'short'} primaryText="Short" />
           </SelectField>
 
           <TextField
