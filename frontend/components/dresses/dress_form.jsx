@@ -65,7 +65,6 @@ export default class DressForm extends React.Component {
             value={this.state.barcode || this.props.barcode }
             errorText={ errors ? errors.barcode : '' }
             />
-
           <TextField
             fullWidth={true}
             floatingLabelText="Title"
@@ -73,7 +72,6 @@ export default class DressForm extends React.Component {
             value={this.state.title || this.props.title }
             errorText={ errors ? errors.title : '' }
             />
-
           <TextField
             fullWidth={true}
             floatingLabelText="Color"
@@ -81,7 +79,6 @@ export default class DressForm extends React.Component {
             value={this.state.color || this.props.color }
             errorText={ errors ? errors.color : '' }
             />
-
           <TextField
             fullWidth={true}
             floatingLabelText="Description"
@@ -89,35 +86,63 @@ export default class DressForm extends React.Component {
             value={this.state.description || this.props.description }
             errorText={ errors ? errors.description : '' }
             />
-
           <TextField
             floatingLabelText="Waist"
             onChange={this.handleRangeChange('waist', [-1.5, 1.5])}
             value={this.state.waist || this.props.waist }
             errorText={ errors ? errors.waist : '' }
             />
-
           <TextField
             floatingLabelText="Min Waist"
             onChange={this.handleChange('min_waist')}
-            value={this.state.min_waist || this.props.min_waist || (this.state.waist && this.state.waist - 1.5)}
+            value={this.state.min_waist || this.props.min_waist}
             errorText={ errors ? errors.min_waist : '' }
             />
-
           <TextField
             floatingLabelText="Max Waist"
             onChange={this.handleChange('max_waist')}
-            value={this.state.max_waist || this.props.max_waist || (this.state.waist && parseFloat(this.state.waist) + 1.5)}
+            value={this.state.max_waist || this.props.max_waist}
             errorText={ errors ? errors.max_waist : '' }
             />
-
+          <br />
           <TextField
             floatingLabelText="Height"
-            onChange={this.handleChange('height')}
-            value={this.state.height || this.props.height}
+            onChange={this.handleRangeChange('height', [-7, 2])}
+            value={this.state.height || this.props.height }
             errorText={ errors ? errors.height : '' }
             />
-
+          <TextField
+            floatingLabelText="Min Height"
+            onChange={this.handleChange('min_height')}
+            value={this.state.min_height || this.props.min_height}
+            errorText={ errors ? errors.min_height : '' }
+            />
+          <TextField
+            floatingLabelText="Max Height"
+            onChange={this.handleChange('max_height')}
+            value={this.state.max_height || this.props.max_height}
+            errorText={ errors ? errors.max_height : '' }
+            />
+          <br />
+          <TextField
+            floatingLabelText="Age"
+            onChange={this.handleRangeChange('age', [-2, 2])}
+            value={this.state.age || this.props.age }
+            errorText={ errors ? errors.age : '' }
+            />
+          <TextField
+            floatingLabelText="Min Age"
+            onChange={this.handleChange('min_age')}
+            value={this.state.min_age || this.props.min_age}
+            errorText={ errors ? errors.min_age : '' }
+            />
+          <TextField
+            floatingLabelText="Max Age"
+            onChange={this.handleChange('max_age')}
+            value={this.state.max_age || this.props.max_age}
+            errorText={ errors ? errors.max_age : '' }
+            />
+          <br />
 
           <SelectField
             fullWidth={true}
