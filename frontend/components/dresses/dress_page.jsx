@@ -21,7 +21,7 @@ export default class DressPage extends React.Component {
       <Card style={{width: '70%', margin: 'auto'}}>
         <CardHeader
           title={dress.title}
-          subtitle={dress.color}
+          subtitle={dress.barcode}
         />
         <CardMedia
           overlay={

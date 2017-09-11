@@ -12,7 +12,7 @@ const DressListItem = props => {
         title={dress.title}
         subtitle={(
           <span className="subtitle">
-            <b>color: {dress.color}</b>
+            <b>{dress.barcode}</b>
             <b>waist: {dress.waist}</b>
             <b>height: {dress.height}</b>
             <b>age: {dress.age}</b>
