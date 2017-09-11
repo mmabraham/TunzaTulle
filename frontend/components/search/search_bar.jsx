@@ -45,17 +45,20 @@ export default class SearchBar extends React.Component {
             onChange={this.handleFilterChange('color')}
             value={this.state.color || this.props.color }
             />
-
           <TextField
             floatingLabelText="Waist"
             onChange={this.handleFilterChange('waist')}
             value={this.state.waist || this.props.waist }
             />
-
           <TextField
             floatingLabelText="Height"
             onChange={this.handleFilterChange('height')}
             value={this.state.height || this.props.height}
+            />
+          <TextField
+            floatingLabelText="Age"
+            onChange={this.handleFilterChange('age')}
+            value={this.state.age || this.props.age}
             />
         <DateRangePicker
           startDate={this.state.startDate}
