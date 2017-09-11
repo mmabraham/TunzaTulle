@@ -2,7 +2,6 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import CurrencyInput from 'react-currency-input';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Avatar from 'material-ui/Avatar';
@@ -19,10 +18,7 @@ export default class DressForm extends React.Component {
   componentDidMount() {
     if (this.props.id) { // editing existing dress
       this.props.fetchDress()
-        .then(() => {
-          this.props.dress.price = `${this.props.dress.price / 100}`
-          this.setState(this.props.dress)
-        })
+        .then(() => {this.setState(this.props.dress)  })
     }
   }
 
@@ -44,16 +40,8 @@ export default class DressForm extends React.Component {
   }
 
   handleSubmit() {
-    const dress = Object.assign(
-      {}, this.state, { price: this.formatPrice()}
-    );
-    this.props.submit(dress)
+    this.props.submit(this.state)
       .then(id => this.props.history.push(`/dresses/${id}`));
-  }
-
-  formatPrice() {
-    const price = this.state.price.replace(/[.,$]/g, '');
-    return parseInt(price, 10);
   }
 
   render() {
@@ -94,17 +82,6 @@ export default class DressForm extends React.Component {
             />
 
           <TextField
-            fullWidth={true}
-            floatingLabelText="Price"
-            >
-            <CurrencyInput
-              value={this.state.price}
-              onChangeEvent={this.handleChange('price')}
-              prefix="$"
-              />
-          </TextField>
-
-          <TextField
             floatingLabelText="Waist"
             onChange={this.handleChange('waist')}
             value={this.state.waist || this.props.waist }
@@ -119,7 +96,7 @@ export default class DressForm extends React.Component {
             />
 
           <TextField
-            floatingLabelText="Waist Stretch"
+            floatingLabelText="Max Waist"
             onChange={this.handleChange('max_waist')}
             value={this.state.max_waist || this.props.max_waist || (this.state.waist && this.state.waist + '.5')}
             errorText={ errors ? errors.max_waist : '' }
