@@ -15,6 +15,7 @@ const DressListItem = props => {
             <b>color: {dress.color}</b>
             <b>waist: {dress.waist}</b>
             <b>height: {dress.height}</b>
+            <b>age: {dress.age}</b>
           </span>
         )}
       >
