@@ -7,7 +7,6 @@
 #  title              :string           not null
 #  color              :string           not null
 #  description        :text
-#  price              :decimal(, )
 #  waist              :decimal(, )      not null
 #  min_waist          :decimal(, )      not null
 #  max_waist          :decimal(, )      not null
@@ -38,7 +37,6 @@ class Dress < ActiveRecord::Base
       .by_dates(filters[:dates])
       .by_height(filters[:height])
       .by_waist(filters[:waist])
-      .by_price(filters[:price])
       .by_sleeve_length(filters[:sleeve_length])
       .by_color(filters[:color])
   end
@@ -66,14 +64,6 @@ class Dress < ActiveRecord::Base
 
     where('min_waist <= ?', waist)
       .where('max_waist >= ?', waist)
-  end
-
-  def self.by_price(price)
-    return all if price.nil? || price.empty?
-    min, max = price[:min].to_s.to_i, price[:max].to_s.to_i
-
-    where('price <= ?', max)
-      .where('price >= ?', min || 0)
   end
 
   def self.by_sleeve_length(sleeve_length)

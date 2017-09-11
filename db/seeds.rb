@@ -35,7 +35,6 @@ dresses = []
     title: Faker::Commerce.product_name,
     color: Faker::Color.color_name,
     description: Faker::Hipster.paragraph,
-    price: rand(50000),
     waist: waist,
     min_waist: waist - 0.5,
     max_waist: waist + 0.5,

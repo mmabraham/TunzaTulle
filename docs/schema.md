@@ -18,7 +18,6 @@ bar_code    | string    |
 title       | string    | not null
 color       | string    | not null
 description | text      |
-price       | integer   |
 image       | handled by paperclip |
 waist       | decimal   | not null
 min_waist   | decimal   | not null

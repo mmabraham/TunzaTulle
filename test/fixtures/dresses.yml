@@ -7,7 +7,6 @@
 #  title              :string           not null
 #  color              :string           not null
 #  description        :text
-#  price              :decimal(, )
 #  waist              :decimal(, )      not null
 #  min_waist          :decimal(, )      not null
 #  max_waist          :decimal(, )      not null
