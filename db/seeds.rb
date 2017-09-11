@@ -30,16 +30,23 @@ dresses = []
 
 48.times do |i|
   waist = rand(300..500) / 10.0
+  age = rand(16)
+  height = rand(400..700) / 10.0
   dresses << Dress.create(
     barcode: Faker::Code.ean,
     title: Faker::Commerce.product_name,
     color: Faker::Color.color_name,
     description: Faker::Hipster.paragraph,
     waist: waist,
-    min_waist: waist - 0.5,
-    max_waist: waist + 0.5,
+    min_waist: waist - 1.5,
+    max_waist: waist + 1.5,
     sleeve_length: ['long', 'half length', 'Half Length', '3 / 4'].sample,
-    height: rand(400..700) / 10.0,
+    height: height,
+    min_height: height - 7,
+    max_height: height + 2,
+    age: age,
+    min_age: age - 2,
+    max_age: age + 2,
     image: images[i]
   )
 end
