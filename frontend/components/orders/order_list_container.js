@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     // will fetch only customers' orders if rendered from customer detail
     fetchOrders: () => dispatch(fetchOrders({customer_id: ownProps.customerId})),
     updateFilter: (filterType, filter) => dispatch(updateOrderFilter(filterType, filter)),
+    withFilters: ownProps.customerId ? false : true,
   }
 }
 

@@ -47,7 +47,7 @@ export default class DressPage extends React.Component {
           </NavLink>
         </CardActions>
         <h1 style={{textAlign: 'center'}}>Orders</h1>
-        <OrderList orders={byEventDate(dress.orders)} filters={false} />
+        <OrderList orders={byEventDate(dress.orders)} />
       </Card>
     )
   }
