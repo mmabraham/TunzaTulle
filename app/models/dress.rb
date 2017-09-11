@@ -22,7 +22,8 @@
 
 class Dress < ActiveRecord::Base
   validates :title, :color, :waist, :min_waist, :max_waist,
-    :sleeve_length, :height, presence: true
+    :age, :min_age, :max_age, :height, :min_height, :max_height,
+    :sleeve_length, presence: true
 
   has_attached_file :image, default_url: "missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
@@ -37,6 +38,7 @@ class Dress < ActiveRecord::Base
       .by_dates(filters[:dates])
       .by_height(filters[:height])
       .by_waist(filters[:waist])
+      .by_age(filters[:age])
       .by_sleeve_length(filters[:sleeve_length])
       .by_color(filters[:color])
   end
@@ -54,16 +56,25 @@ class Dress < ActiveRecord::Base
     )
   end
 
-  def self.by_height(height)
-    return all if height.nil? || height.empty?
-    where(height: height)
-  end
-
   def self.by_waist(waist)
     return all if waist.nil? || waist.empty?
 
     where('min_waist <= ?', waist)
       .where('max_waist >= ?', waist)
+  end
+
+  def self.by_age(age)
+    return all if age.nil? || age.empty?
+
+    where('min_age <= ?', age)
+      .where('max_age >= ?', age)
+  end
+
+  def self.by_height(height)
+    return all if height.nil? || height.empty?
+
+    where('min_height <= ?', height)
+      .where('max_height >= ?', height)
   end
 
   def self.by_sleeve_length(sleeve_length)
