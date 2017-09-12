@@ -8,11 +8,11 @@ const CustomerDetail = ({customer}) => {
   if (!customer) return null;
 
   const style = {
-    width: '400px',
+    width: '430px',
     margin: '20px',
     padding: '20px',
     zIndex: 1,
-    position: 'fixed',
+    position: 'absolute',
     right: '0',
     textAlign: 'center',
   }
