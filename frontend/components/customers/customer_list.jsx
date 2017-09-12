@@ -26,7 +26,7 @@ export default class CustomersList extends React.Component {
     ))
     return (
       <div className="customer-list-page">
-        <Paper>
+        <Paper style={{width: '50%', minWidth: 500}}>
           <Menu>{customers}</Menu>
         </Paper>
         <CustomerDetail customer={this.state.customerShowing}/>
