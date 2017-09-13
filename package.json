@@ -7,6 +7,9 @@
     "doc": "docs",
     "test": "test"
   },
+  "engines": {
+    "node": "7.9.0"
+  },
   "scripts": {
     "test": "jest",
     "webpack": "webpack --watch",
