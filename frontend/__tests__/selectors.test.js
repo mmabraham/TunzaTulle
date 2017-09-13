@@ -36,3 +36,5 @@ const sorted = [
 test('sorts orders by event_date prop', () => {
   expect(byEventDate(orders)).toEqual(sorted)
 })
+
+// asArray is a dependent of byEventDate

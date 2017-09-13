@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DressListItem renders correctly 1`] = `
+<a
+  href="/dresses/51"
+  onClick={[Function]}
+>
+  <div
+    className="dress-list-tile"
+    cols={1}
+    rows={1}
+    style={
+      Object {
+        "display": "block",
+        "height": "100%",
+        "muiPrepared": true,
+        "overflow": "hidden",
+        "position": "relative",
+      }
+    }
+  >
+    <img
+      src="https://s3.amazonaws.com/tunza-dev/dresses/images/000/000/051/original/data?1505226569"
+      style={
+        Object {
+          "height": "100%",
+          "left": "50%",
+          "muiPrepared": true,
+          "position": "relative",
+          "transform": "translateX(-50%)",
+        }
+      }
+    />
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "background": "rgba(0, 0, 0, 0.4)",
+          "bottom": 0,
+          "display": "flex",
+          "height": 68,
+          "left": 0,
+          "muiPrepared": true,
+          "position": "absolute",
+          "right": 0,
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "color": "#ffffff",
+            "flexGrow": 1,
+            "marginLeft": 16,
+            "marginRight": 0,
+            "muiPrepared": true,
+            "overflow": "hidden",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "fontSize": "16px",
+              "muiPrepared": true,
+              "overflow": "hidden",
+              "textOverflow": "ellipsis",
+              "whiteSpace": "nowrap",
+            }
+          }
+        >
+          this fakdfjlasdf
+        </div>
+        <div
+          style={
+            Object {
+              "fontSize": "12px",
+              "muiPrepared": true,
+              "overflow": "hidden",
+              "textOverflow": "ellipsis",
+              "whiteSpace": "nowrap",
+            }
+          }
+        >
+          <span
+            className="subtitle"
+          >
+            <b>
+              53245234523
+            </b>
+            <b>
+              waist: 
+              34.0
+            </b>
+            <b>
+              height: 
+              23.0
+            </b>
+            <b>
+              age: 
+              4
+            </b>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+`;
