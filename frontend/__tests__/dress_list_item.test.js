@@ -27,7 +27,7 @@ const dressData = {
 test('DressListItem renders correctly', () => {
   const component = renderer.create(
     <MuiThemeProvider>
-      <StaticRouter location="/dresses">
+      <StaticRouter location="/dresses" context={{}}>
         <DressListItem dress={dressData} />
       </StaticRouter>
     </MuiThemeProvider>
