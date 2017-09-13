@@ -48,10 +48,10 @@
   },
   "devDependencies": {
     "babel-jest": "^21.0.2",
-    "babel-preset-env": "*",
-    "react-test-renderer": "^15.6.1",
+    "babel-preset-env": "^1.6.0",
     "jest": "^21.0.2",
     "react-addons-test-utils": "15.4.2",
+    "react-test-renderer": "^15.6.1",
     "redux-logger": "^3.0.6"
   }
 }
