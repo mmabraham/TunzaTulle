@@ -31,9 +31,8 @@
   - accepts `date_range` query params to filter by availability
   - accepts `waist` query param to filter by waist fit
   - accepts `height` query param to filter by height
-  - accepts `color` query param to filter by color
+  - accepts `query` param to filter by barcode, color, title, and description
   - accepts `sleeve_length` query param to filter by sleeve_length type
-  - accepts `title` query param to filter by title
 - `POST /api/dresses`
 	- Create listing
 - `GET /api/dresses/:id`
@@ -44,7 +43,8 @@
 ### Orders
 
 - `GET /api/orders`
-	- accepts `customer_id` or `dress_id` query param
+	- accepts `customer_id` or `dress_id` query params
+	- accepts `phase` and `status` query params
 	- includes necessary dress, order and customer info
 - `POST /api/orders`
 - `PATCH /api/orders/:id`
@@ -52,4 +52,5 @@
 
 ### Customers
 - `POST /api/customers`
-- `PATCH /api/customers`
+- `PATCH /api/customers/:id`
+- `DELETE /api/customers/:id`
