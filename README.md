@@ -13,11 +13,119 @@ An authorized admin can:
 
 Reminder emails are sent to all customers the day after their event after 6:00 am.
 
-## Techical details
+## Technical details
 - Picture uploads handled by paperclip and stored remotely on AWS for faster load time.
 - Custom implementation of back and front end auth using BCrypt and bootstrapping user data.
 - Search parameters are persisted within the redux store to allow for multi-filter searches.
 - Initiates mailer tasks from an external service to ensure reliable mailing.
+
+### Reusable patterns
+
+- filtering by query
+
+All queries are passed into the Model::filter method
+```ruby
+# controllers/orders_controller.rb
+
+@orders = Order
+  .includes(:customer, :dress_orders ,:dresses)
+  .order(:start_date)
+  .filter(params)
+```
+Model::filter passes the relevant param to each method
+```ruby
+# models/orders.rb
+
+def self.filter(filters)
+  self
+    .by_status(filters[:status])
+    .by_phase(filters[:phase])
+end
+```
+
+each method filters the collection proxy by it's filter param
+```ruby
+def self.by_status(status)
+  status ? where(status: status) : self
+end
+```
+- union of properties
+
+The following pattern uses meta-programming to build collections of orders with ANY of the requested phase properties.
+
+```ruby
+# models/orders.rb
+
+
+def self.by_phase(phases)
+  return all if phases.nil?
+  safe_phases(phases)
+    .reduce(Order.none) { |acc, phase| acc + send(phase) }
+end
+
+def self.safe_phases(raw_phases)
+  safe = Set.new(['past', 'current', 'future'])
+  raw_phases.select { |phase| safe.include?(phase)}
+end
+
+def self.current
+  where('? BETWEEN start_date AND end_date', Time.now)
+end
+
+def self.past
+  where('end_date < ?', Time.now)
+end
+
+def self.future
+  where('start_date > ?', Time.now)
+end
+```
+
+- form input handlers
+
+This pattern uses functional programming to build a custom form input handler based on the field name parameter. It is compatible with several different input component APIs.
+
+```js
+  handleChange(field) {
+    return (e, i, val) => {
+      this.setState({[field]: val || e.target.value})
+    }
+  }
+```
+
+- filter buttons
+
+This pattern is useful for dynamically placing filter buttons for entity filtering.
+
+usage:
+```js
+<FilterButtons
+  filters={['past', 'current', 'future']}
+  onChange={(filters) => this.props.updateFilter('phase', filters)}
+  />
+```
+
+
+- form errorText
+
+This pattern displays the errors from the Redux store, uniformly for each input field.
+
+```js
+  render()
+  const errors = this.props.errors;
+  return (
+    ...
+    <TextField
+      fullWidth={true}
+      floatingLabelText="Bar code"
+      onChange={this.handleChange('barcode')}
+      value={this.state.barcode || this.props.barcode }
+      errorText={ errors ? errors.barcode : '' }
+      />
+    ...
+  )
+}
+```
 
 ## API Endpoints
 

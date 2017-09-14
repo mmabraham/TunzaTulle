@@ -54,3 +54,6 @@
 - `POST /api/customers`
 - `PATCH /api/customers/:id`
 - `DELETE /api/customers/:id`
+
+- `GET /api/customers/send_all_reminders`
+  - initiates the reminder mailer to send all due emails
