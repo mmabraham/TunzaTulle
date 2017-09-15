@@ -83,14 +83,14 @@ export default class DressSelect extends React.Component {
     }
 
     const selectedDressComponents = this.state.selectedDresses.map((dress) => {
-      return (
+      return dress ? (
         <DressThumbnail
           dress={dress}
           key={dress.id}
           onRemove={() => this.removeDress(dress)}
           isAvailable={() => this.isAvailable(dress)}
         />
-      )
+      ) : null;
     })
 
     return (
