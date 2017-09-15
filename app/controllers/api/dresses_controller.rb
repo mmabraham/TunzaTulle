@@ -1,7 +1,7 @@
 class Api::DressesController < ApplicationController
   before_action :require_admin!
   def index
-    @dresses = Dress.filter(params[:filters])
+    @dresses = Dress.filter(params[:filters]).includes(:orders)
     render :index
   end
 
