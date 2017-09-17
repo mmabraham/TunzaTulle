@@ -1,4 +1,5 @@
 class Api::CustomersController < ApplicationController
+  before_action :require_admin!
   def index
     @customers = Customer.all
     render :index
