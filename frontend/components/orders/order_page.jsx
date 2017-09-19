@@ -31,7 +31,7 @@ export default class OrderPage extends React.Component {
           title={`${new Date(order.start_date).toDateString()} - ${new Date(order.end_date).toDateString()}`}
           subtitle={``}
         />
-      <CardTitle title={order.status} subtitle={moment.default(order.event_date).fromNow()} />
+      <CardTitle title={order.status} subtitle={'The event is ' + moment.default(order.event_date).fromNow()} />
         <CustomerDetail customer={order.customer}/>
         <CardActions>
           <NavLink to={`/orders/edit/${order.id}`} >
