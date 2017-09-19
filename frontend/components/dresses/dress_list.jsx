@@ -16,6 +16,7 @@ export default class DressList extends React.Component {
   }
 
   render() {
+    console.log(this.props, '============== here ===============')
     const dresses = this.props.dresses.map(dress => (
       <DressListItem
         dress={dress}
